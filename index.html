@@ -1,242 +1,447 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>REWATOOL - 300+ Professional Tools - 100% Free Forever</title>
+    <title>RewaTool - 350+ Professional Tools | 100% Free Forever</title>
+    <meta name="description" content="350+ Professional Tools Completely Free Forever. No Watermarks, No Limits. Enterprise-grade tools for everyone.">
+    <meta name="keywords" content="free tools, online tools, PDF tools, image tools, video tools, audio tools, converter tools">
+    <meta name="author" content="RewaTool">
     
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="300+ Professional Tools - 100% Free Forever. AI Tools, PDF Tools, Calculators, Design Tools, Business Tools, and more. No Premium, No Subscriptions.">
-    <meta name="keywords" content="free tools, online tools, AI tools, PDF converter, calculator, image editor, video converter, SEO tools, business tools">
-    <meta name="author" content="REWATOOL">
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
     
-    <!-- Open Graph -->
-    <meta property="og:title" content="REWATOOL - 300+ Professional Tools - 100% Free Forever">
-    <meta property="og:description" content="Transform Your Work with 300+ Professional Tools. Completely Free Forever • No Watermarks • No Limits">
-    <meta property="og:image" content="https://rewatool.com/og-image.jpg">
-    <meta property="og:url" content="https://rewatool.com">
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="https://img.icons8.com/color/96/000000/tools.png">
     
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     
-    <!-- AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_AD_CLIENT_ID" crossorigin="anonymous"></script>
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- Styles -->
     <link rel="stylesheet" href="style.css">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#1E40AF">
 </head>
 <body>
-    <!-- Loading -->
-    <div id="loading">
-        <div class="loader"></div>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loader">
+            <div class="logo-loader">
+                <i class="fas fa-tools"></i>
+                <span class="logo-text">RewaTool</span>
+            </div>
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+                <span class="progress-text" id="progressText">Loading Tools Database...</span>
+            </div>
+            <div class="loading-stats">
+                <div class="stat"><i class="fas fa-tools"></i> 350+ Tools</div>
+                <div class="stat"><i class="fas fa-language"></i> 50+ Languages</div>
+                <div class="stat"><i class="fas fa-bolt"></i> 100% Free</div>
+            </div>
+        </div>
     </div>
 
     <!-- Header -->
-    <header>
-        <nav>
-            <div class="logo">
-                <h1>REWATOOL</h1>
-                <p>300+ Tools | 100% Free</p>
-            </div>
-            <div class="nav-links">
-                <a href="#home" class="active">Home</a>
-                <a href="#tools">All Tools</a>
-                <a href="#categories">Categories</a>
-                <a href="#how">How It Works</a>
-                <a href="#contact">Contact</a>
-            </div>
-            <button class="menu-btn">
-                <span class="material-icons">menu</span>
-            </button>
-        </nav>
+    <header class="header" id="mainHeader">
+        <div class="container">
+            <nav class="navbar">
+                <!-- Logo -->
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>RewaTool</h1>
+                        <p>350+ Tools | 100% Free</p>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <ul class="nav-menu">
+                    <li><a href="#home" class="active"><i class="fas fa-home"></i> Home</a></li>
+                    <li class="dropdown">
+                        <a href="#tools"><i class="fas fa-tools"></i> All Tools <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-menu">
+                            <div class="dropdown-grid">
+                                <div class="dropdown-col">
+                                    <h4>Popular Categories</h4>
+                                    <a href="#image-tools"><i class="fas fa-image"></i> Image Tools</a>
+                                    <a href="#pdf-tools"><i class="fas fa-file-pdf"></i> PDF Tools</a>
+                                    <a href="#video-tools"><i class="fas fa-video"></i> Video Tools</a>
+                                    <a href="#audio-tools"><i class="fas fa-music"></i> Audio Tools</a>
+                                </div>
+                                <div class="dropdown-col">
+                                    <h4>Business Tools</h4>
+                                    <a href="#calculator"><i class="fas fa-calculator"></i> Calculators</a>
+                                    <a href="#text-tools"><i class="fas fa-font"></i> Text Tools</a>
+                                    <a href="#web-tools"><i class="fas fa-code"></i> Web Tools</a>
+                                    <a href="#design-tools"><i class="fas fa-palette"></i> Design Tools</a>
+                                </div>
+                                <div class="dropdown-col">
+                                    <h4>Quick Access</h4>
+                                    <a href="#featured"><i class="fas fa-star"></i> Featured Tools</a>
+                                    <a href="#new"><i class="fas fa-newspaper"></i> New Tools</a>
+                                    <a href="#popular"><i class="fas fa-chart-line"></i> Popular Tools</a>
+                                    <a href="#recent"><i class="fas fa-history"></i> Recently Used</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li><a href="#categories"><i class="fas fa-th-large"></i> Categories</a></li>
+                    <li><a href="#features"><i class="fas fa-star"></i> Features</a></li>
+                    <li><a href="#about"><i class="fas fa-info-circle"></i> About</a></li>
+                    <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+                </ul>
+
+                <!-- Right Side Controls -->
+                <div class="header-controls">
+                    <!-- Search -->
+                    <div class="search-box">
+                        <input type="text" id="globalSearch" placeholder="Search 350+ Tools...">
+                        <button class="search-btn"><i class="fas fa-search"></i></button>
+                        <div class="search-results" id="searchResults"></div>
+                    </div>
+
+                    <!-- Language -->
+                    <div class="language-selector">
+                        <select id="languageSelect">
+                            <option value="en">🇺🇸 English</option>
+                            <option value="hi">🇮🇳 हिन्दी</option>
+                            <option value="ur">🇵🇰 اردو</option>
+                            <option value="ar">🇸🇦 العربية</option>
+                            <option value="es">🇪🇸 Español</option>
+                        </select>
+                    </div>
+
+                    <!-- Theme -->
+                    <button class="theme-toggle" id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+
+                    <!-- User -->
+                    <div class="user-menu">
+                        <button class="user-btn" id="userBtn">
+                            <i class="fas fa-user"></i>
+                        </button>
+                        <div class="user-dropdown" id="userDropdown">
+                            <a href="#login"><i class="fas fa-sign-in-alt"></i> Login</a>
+                            <a href="#register"><i class="fas fa-user-plus"></i> Register</a>
+                            <a href="#dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                            <a href="#settings"><i class="fas fa-cog"></i> Settings</a>
+                            <a href="#help"><i class="fas fa-question-circle"></i> Help</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
     </header>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav-header">
+            <div class="logo">
+                <i class="fas fa-tools"></i>
+                <span>RewaTool</span>
+            </div>
+            <button class="close-btn" id="closeMobileNav">&times;</button>
+        </div>
+        <div class="mobile-nav-content">
+            <a href="#home"><i class="fas fa-home"></i> Home</a>
+            <a href="#tools"><i class="fas fa-tools"></i> All Tools</a>
+            <a href="#categories"><i class="fas fa-th-large"></i> Categories</a>
+            <a href="#features"><i class="fas fa-star"></i> Features</a>
+            <a href="#about"><i class="fas fa-info-circle"></i> About</a>
+            <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+            <a href="#login"><i class="fas fa-sign-in-alt"></i> Login</a>
+            <a href="#register"><i class="fas fa-user-plus"></i> Register</a>
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="container">
-            <h1>Transform Your Work with <span class="highlight">300+ Professional Tools</span></h1>
-            <p>Completely Free Forever • No Watermarks • No Limits • No Premium Tiers</p>
-            <div class="hero-stats">
-                <div class="stat">
-                    <h3>300+</h3>
-                    <p>Tools</p>
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">Transform Your Workflow with <span class="highlight">350+ Professional Tools</span></h1>
+                    <p class="hero-subtitle">Completely Free Forever • No Watermarks • No Limits • No Premium</p>
+                    
+                    <div class="hero-stats">
+                        <div class="stat-card">
+                            <i class="fas fa-tools"></i>
+                            <h3>350+</h3>
+                            <p>Tools</p>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-globe"></i>
+                            <h3>50+</h3>
+                            <p>Languages</p>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-bolt"></i>
+                            <h3>&lt;1s</h3>
+                            <p>Load Time</p>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-dollar-sign"></i>
+                            <h3>100%</h3>
+                            <p>Free</p>
+                        </div>
+                    </div>
+
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary" id="startExploring">
+                            <i class="fas fa-rocket"></i> Start Exploring
+                        </button>
+                        <button class="btn btn-secondary" id="watchDemo">
+                            <i class="fas fa-play-circle"></i> Watch Demo
+                        </button>
+                        <button class="btn btn-outline" id="installPWA">
+                            <i class="fas fa-mobile-alt"></i> Install App
+                        </button>
+                    </div>
                 </div>
-                <div class="stat">
-                    <h3>100%</h3>
-                    <p>Free</p>
+
+                <div class="hero-visual">
+                    <div class="floating-tools">
+                        <div class="tool-float" style="animation-delay: 0s">
+                            <i class="fas fa-image"></i>
+                            <span>Image Tools</span>
+                        </div>
+                        <div class="tool-float" style="animation-delay: 1s">
+                            <i class="fas fa-file-pdf"></i>
+                            <span>PDF Tools</span>
+                        </div>
+                        <div class="tool-float" style="animation-delay: 2s">
+                            <i class="fas fa-calculator"></i>
+                            <span>Calculators</span>
+                        </div>
+                        <div class="tool-float" style="animation-delay: 3s">
+                            <i class="fas fa-video"></i>
+                            <span>Video Tools</span>
+                        </div>
+                        <div class="tool-float" style="animation-delay: 4s">
+                            <i class="fas fa-music"></i>
+                            <span>Audio Tools</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="stat">
-                    <h3>50+</h3>
-                    <p>Categories</p>
-                </div>
-                <div class="stat">
-                    <h3>24/7</h3>
-                    <p>Available</p>
-                </div>
-            </div>
-            <div class="cta-buttons">
-                <a href="#tools" class="btn primary">Explore All Tools</a>
-                <a href="#how" class="btn secondary">How It Works</a>
             </div>
         </div>
     </section>
 
-    <!-- Categories -->
+    <!-- AdSense Banner 1 -->
+    <div class="adsense-banner">
+        <div class="container">
+            <!-- AdSense Code -->
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-XXXXXXXXXXXXXXX"
+                data-ad-slot="1234567890"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </div>
+
+    <!-- Categories Section -->
     <section class="categories" id="categories">
         <div class="container">
-            <h2>Browse by Category</h2>
-            <p>Explore tools by category</p>
-            <div class="category-grid" id="categoryGrid">
-                <!-- Categories loaded by JS -->
+            <div class="section-header">
+                <h2 class="section-title">30 Professional Categories</h2>
+                <p class="section-subtitle">Browse 350+ tools organized into professional categories</p>
+            </div>
+
+            <div class="categories-grid" id="categoriesContainer">
+                <!-- Categories loaded by JavaScript -->
+            </div>
+
+            <div class="view-all">
+                <button class="btn btn-outline" id="viewAllCategories">
+                    <i class="fas fa-eye"></i> View All 30 Categories
+                </button>
             </div>
         </div>
     </section>
 
     <!-- Featured Tools -->
-    <section class="featured">
+    <section class="featured-tools" id="featured">
         <div class="container">
-            <h2>Most Popular Tools</h2>
-            <div class="tools-slider">
-                <div class="slide">
-                    <div class="tool-card">
-                        <div class="tool-icon">🖼️</div>
-                        <h3>AI Image Generator</h3>
-                        <p>Create amazing images with AI</p>
-                        <button class="btn small">Try Now</button>
-                    </div>
-                </div>
-                <div class="slide">
-                    <div class="tool-card">
-                        <div class="tool-icon">📄</div>
-                        <h3>PDF Converter</h3>
-                        <p>Convert PDF to Word, Excel, PPT</p>
-                        <button class="btn small">Try Now</button>
-                    </div>
-                </div>
-                <div class="slide">
-                    <div class="tool-card">
-                        <div class="tool-icon">🎬</div>
-                        <h3>Video Editor</h3>
-                        <p>Edit videos online for free</p>
-                        <button class="btn small">Try Now</button>
-                    </div>
-                </div>
+            <div class="section-header">
+                <h2 class="section-title">Featured Tools</h2>
+                <p class="section-subtitle">Most popular tools used by professionals worldwide</p>
+            </div>
+
+            <div class="tools-carousel" id="featuredTools">
+                <!-- Featured tools loaded by JavaScript -->
             </div>
         </div>
     </section>
 
-    <!-- All Tools -->
+    <!-- AdSense Banner 2 -->
+    <div class="adsense-banner">
+        <div class="container">
+            <!-- AdSense Code -->
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-XXXXXXXXXXXXXXX"
+                data-ad-slot="2345678901"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </div>
+
+    <!-- All Tools Section -->
     <section class="all-tools" id="tools">
         <div class="container">
-            <h2>All 300+ Tools</h2>
-            <div class="search-box">
-                <input type="text" id="searchInput" placeholder="Search tools...">
-                <select id="categorySelect">
-                    <option value="">All Categories</option>
+            <div class="section-header">
+                <h2 class="section-title">All 350+ Tools</h2>
+                <p class="section-subtitle">Click any tool to start using it instantly</p>
+            </div>
+
+            <div class="tools-filter">
+                <input type="text" id="toolSearch" placeholder="Search tools by name or category...">
+                <select id="categoryFilter">
+                    <option value="all">All Categories</option>
                 </select>
+                <button class="btn btn-small" id="clearFilter">
+                    <i class="fas fa-times"></i> Clear
+                </button>
             </div>
-            <div class="tools-grid" id="toolsGrid">
-                <!-- Tools loaded by JS -->
+
+            <div class="tools-grid" id="toolsContainer">
+                <!-- All tools loaded by JavaScript -->
             </div>
-            <button id="loadMore" class="btn secondary">Load More Tools</button>
+
+            <div class="pagination" id="pagination">
+                <!-- Pagination controls -->
+            </div>
         </div>
     </section>
 
-    <!-- AdSense Ad Unit -->
-    <section class="ad-section">
+    <!-- Features Section -->
+    <section class="features-section" id="features">
         <div class="container">
-            <div class="ad-container">
-                <!-- AdSense Code -->
-                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-YOUR_AD_CLIENT_ID"
-                     data-ad-slot="1234567890"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
-                <script>
-                     (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
+            <div class="section-header">
+                <h2 class="section-title">Why Choose RewaTool?</h2>
+                <p class="section-subtitle">Enterprise-grade features at zero cost</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Blazing Fast</h3>
+                    <p>Loads in &lt;1 second. Processes files in seconds.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Mobile Friendly</h3>
+                    <p>Works perfectly on all devices. Install as PWA.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-language"></i>
+                    </div>
+                    <h3>50+ Languages</h3>
+                    <p>Full interface translation with RTL support.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Secure & Private</h3>
+                    <p>Enterprise-grade security. Your data is safe.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3>Cloud Storage</h3>
+                    <p>10GB free cloud storage for all users.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <h3>Regular Updates</h3>
+                    <p>New tools and features added every week.</p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- How It Works -->
-    <section class="how-it-works" id="how">
+    <section class="how-it-works">
         <div class="container">
-            <h2>How It Works</h2>
+            <div class="section-header">
+                <h2 class="section-title">How It Works</h2>
+                <p class="section-subtitle">Get results in 4 simple steps</p>
+            </div>
+
             <div class="steps">
                 <div class="step">
                     <div class="step-number">1</div>
-                    <h3>Choose Tool</h3>
-                    <p>Select from 300+ tools</p>
+                    <div class="step-icon"><i class="fas fa-search"></i></div>
+                    <h3>Select Tool</h3>
+                    <p>Browse 350+ professional tools</p>
                 </div>
                 <div class="step">
                     <div class="step-number">2</div>
-                    <h3>Upload/Input</h3>
-                    <p>Add your files or data</p>
+                    <div class="step-icon"><i class="fas fa-upload"></i></div>
+                    <h3>Upload Files</h3>
+                    <p>Drag & drop or browse files</p>
                 </div>
                 <div class="step">
                     <div class="step-number">3</div>
+                    <div class="step-icon"><i class="fas fa-cogs"></i></div>
                     <h3>Process</h3>
-                    <p>AI processes instantly</p>
+                    <p>AI-powered processing</p>
                 </div>
                 <div class="step">
                     <div class="step-number">4</div>
+                    <div class="step-icon"><i class="fas fa-download"></i></div>
                     <h3>Download</h3>
-                    <p>Get results for free</p>
+                    <p>Multiple format options</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact -->
-    <section class="contact" id="contact">
+    <!-- About Section -->
+    <section class="about" id="about">
         <div class="container">
-            <h2>Contact Us</h2>
-            <form id="contactForm">
-                <input type="text" placeholder="Your Name" required>
-                <input type="email" placeholder="Your Email" required>
-                <textarea placeholder="Your Message" required></textarea>
-                <button type="submit" class="btn primary">Send Message</button>
-            </form>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>REWATOOL</h3>
-                    <p>Professional tools for everyone, completely free forever.</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <a href="#home">Home</a>
-                    <a href="#tools">Tools</a>
-                    <a href="#categories">Categories</a>
-                    <a href="#contact">Contact</a>
-                </div>
-                <div class="footer-section">
-                    <h4>Legal</h4>
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
-                    <a href="#">Cookie Policy</a>
-                </div>
-                <div class="footer-section">
-                    <h4>Contact</h4>
-                    <p>Email: support@rewatool.com</p>
-                    <p>Email: contact@rewatool.com</p>
-                </div>
+            <div class="section-header">
+                <h2 class="section-title">About RewaTool</h2>
+                <p class="section-subtitle">Our mission is to democratize professional tools globally</p>
             </div>
-            <div class="copyright">
-                <p>&copy; 2024 REWATOOL. All rights reserved.</p>
-                <p>300+ Professional Tools - 100% Free Forever</p>
-            </div>
-        </div>
-    </footer>
 
-    <script src="script.js"></script>
-</body>
-</html>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>World's Most Advanced Free Tool Platform</h3>
+                    <p>RewaTool provides 350+ professional tools completely free forever. No watermarks, no limits, no premium tiers.</p>
+                    
+                    <div class="about-stats">
+                        <div class="stat">
+                            <h4>350+</h4>
+                            <p>Professional Tools</p>
+                        </div>
+   
