@@ -2,6 +2,21 @@
 /* REWATOOL - COMPLETE CSS */
 /* ============================= */
 
+/* IMMEDIATE FIX - Force show content */
+body {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+#loadingScreen {
+    display: none !important;
+}
+
+/* Show content immediately */
+.header, .hero, .categories, .all-tools {
+    opacity: 1 !important;
+    transform: none !important;
+}
 :root {
     /* Primary Colors */
     --primary-color: #1E40AF;
