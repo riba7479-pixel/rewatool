@@ -1,429 +1,352 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RewaTool Pro | 300+ Professional Tools | 100% Free</title>
-    <meta name="description" content="300+ professional tools for PDF, images, videos, documents. 100% free forever with AI-powered features.">
-    <meta name="keywords" content="pdf tools, image converter, video compressor, free tools, online tools">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛠️</text></svg>">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- AdSense Code -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+<meta charset="UTF-8" />
+<title>rewatool.online — Pro Animated Theme</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="Premium animated theme for free image tools — pro UX/UI, rich color system, AdSense-ready." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
+<style>
+/* ===== Color systems (switchable) ===== */
+:root{
+  --bg:#0a0f1f; --bg2:#0f1426; --panel:rgba(23,26,43,.75); --panel-solid:#171a2b;
+  --text:#e6e6f0; --muted:#9aa0b4;
+  --accent:#7aa2ff; --accent2:#00d4ff; --accent3:#9b72ff;
+  --success:#2bd47d; --danger:#ff6b6b; --gold:#f5c518;
+  --glass:rgba(255,255,255,.06); --glass-border:rgba(255,255,255,.12);
+  --shadow:0 10px 30px rgba(0,0,0,.35);
+}
+.theme-ocean{
+  --bg:#061a24; --bg2:#0b2430; --accent:#00bcd4; --accent2:#00e5ff; --accent3:#4dd0e1;
+}
+.theme-royal{
+  --bg:#0f0a1f; --bg2:#1a1333; --accent:#7c4dff; --accent2:#b388ff; --accent3:#9b72ff;
+}
+.theme-sunset{
+  --bg:#1a0f0f; --bg2:#2a1414; --accent:#ff7a7a; --accent2:#ffb36b; --accent3:#ffd36b;
+}
+
+/* ===== Base layout ===== */
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{
+  font-family:Inter,system-ui,Segoe UI,Arial;
+  color:var(--text);
+  background: radial-gradient(1200px 600px at 10% 10%, var(--bg2), var(--bg)),
+              radial-gradient(1200px 600px at 90% 90%, var(--bg2), var(--bg));
+  background-attachment: fixed;
+}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+button,input,select{font-family:inherit}
+
+/* ===== Animated header ===== */
+.header{
+  position:sticky;top:0;z-index:50;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:14px 20px;
+  backdrop-filter: blur(10px);
+  background:linear-gradient(180deg, rgba(10,15,31,.75), rgba(10,15,31,.55));
+  border-bottom:1px solid var(--glass-border);
+}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{
+  width:32px;height:32px;border-radius:10px;
+  background:conic-gradient(from 180deg, var(--accent), var(--accent2), var(--accent3), var(--accent));
+  box-shadow:0 0 24px rgba(122,162,255,.35);
+  animation:spin 6s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.title{font-weight:800;letter-spacing:.4px}
+.sub{font-size:12px;color:var(--muted)}
+.nav{display:flex;gap:8px}
+
+/* ===== Buttons (micro-interactions) ===== */
+.btn{
+  background:linear-gradient(180deg, rgba(26,31,53,.9), rgba(26,31,53,.7));
+  color:var(--text);
+  border:1px solid var(--glass-border);
+  border-radius:10px;padding:10px 14px;cursor:pointer;
+  transition:transform .12s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.btn:hover{transform:translateY(-1px);border-color:var(--accent);box-shadow:0 8px 20px rgba(122,162,255,.25)}
+.btn:active{transform:translateY(0);box-shadow:none}
+
+/* ===== Hero (parallax + gradient shimmer) ===== */
+.hero{
+  position:relative;overflow:hidden;
+  padding:40px 20px;text-align:center;
+}
+.hero h1{margin:0 0 10px;font-size:28px;letter-spacing:.2px}
+.hero p{margin:0;color:var(--muted)}
+.hero::before{
+  content:"";position:absolute;inset:-20%;z-index:-1;
+  background:radial-gradient(600px 300px at 30% 20%, rgba(122,162,255,.25), transparent),
+             radial-gradient(600px 300px at 70% 80%, rgba(0,212,255,.25), transparent);
+  animation:floatBg 12s ease-in-out infinite alternate;
+}
+@keyframes floatBg{
+  0%{transform:translate3d(0,0,0)}
+  100%{transform:translate3d(0,-10px,0)}
+}
+
+/* ===== Cards (glassmorphism) ===== */
+.container{max-width:1200px;margin:0 auto;padding:16px;display:grid;gap:16px}
+.card{
+  background:var(--glass);
+  border:1px solid var(--glass-border);
+  border-radius:16px;padding:16px;
+  box-shadow:var(--shadow);
+}
+.card-solid{background:var(--panel-solid);border:1px solid #22263d}
+
+/* ===== Grid ===== */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:1100px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:750px){.grid{grid-template-columns:1fr}}
+
+/* ===== Tool cards (animated hover) ===== */
+.tool-card{position:relative;overflow:hidden}
+.tool-card h3{margin:0 0 6px}
+.tool-card p{margin:0;color:var(--muted)}
+.tool-card .actions{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap}
+.tool-card::after{
+  content:"";position:absolute;inset:0;border-radius:16px;
+  background:linear-gradient(135deg, rgba(122,162,255,.12), rgba(0,212,255,.12));
+  opacity:0;transition:opacity .25s ease;
+}
+.tool-card:hover::after{opacity:1}
+
+/* ===== Badges ===== */
+.badge{
+  display:inline-block;padding:6px 10px;border-radius:999px;
+  background:linear-gradient(180deg, rgba(26,31,53,.9), rgba(26,31,53,.7));
+  border:1px solid var(--glass-border);color:var(--muted);font-size:12px
+}
+
+/* ===== Ad slots ===== */
+.ad{
+  background:linear-gradient(180deg, rgba(11,14,26,.9), rgba(11,14,26,.7));
+  border:1px dashed var(--glass-border);border-radius:14px;padding:14px;text-align:center;color:#9aa0b4
+}
+.ad .label{font-size:12px;color:var(--accent)}
+
+/* ===== Footer ===== */
+.footer{text-align:center;padding:18px;color:var(--muted);border-top:1px solid var(--glass-border)}
+
+/* ===== Modal ===== */
+.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.55);z-index:100}
+.modal.open{display:flex}
+.sheet{
+  width:min(1000px,92vw);max-height:90vh;overflow:auto;
+  background:var(--glass);border:1px solid var(--glass-border);border-radius:18px;box-shadow:var(--shadow)
+}
+.sheet .head{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--glass-border)}
+.sheet .head h2{margin:0;font-size:18px}
+.sheet .body{padding:12px 16px;display:grid;gap:12px}
+
+/* ===== Panels & preview ===== */
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.panel{background:linear-gradient(180deg, rgba(18,21,40,.9), rgba(18,21,40,.7));border-radius:14px;padding:12px;position:relative;overflow:hidden}
+.panel h4{margin:0 0 8px;color:var(--muted)}
+.panel img,.panel canvas{width:100%;border-radius:10px;display:block}
+.preview{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:900px){.preview{grid-template-columns:1fr}}
+
+/* ===== Meter & status ===== */
+.meter{height:10px;background:rgba(26,31,53,.8);border-radius:8px;overflow:hidden}
+.fill{height:100%;width:0;background:linear-gradient(90deg, var(--accent), var(--accent2), var(--accent3));transition:width .3s}
+small.status{color:var(--muted)}
+
+/* ===== Tabs ===== */
+.tabbar{display:flex;gap:8px;flex-wrap:wrap}
+.tab{
+  background:linear-gradient(180deg, rgba(26,31,53,.9), rgba(26,31,53,.7));
+  border:1px solid var(--glass-border);color:var(--text);
+  padding:6px 10px;border-radius:10px;cursor:pointer;transition:border-color .2s ease, box-shadow .2s ease
+}
+.tab.active{border-color:var(--accent);box-shadow:0 0 12px rgba(122,162,255,.35)}
+
+/* ===== Micro animations ===== */
+.fade-in{animation:fadeIn .25s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.glow{box-shadow:0 0 28px rgba(122,162,255,.25)}
+.range-glow::-webkit-slider-thumb{
+  appearance:none;width:18px;height:18px;border-radius:50%;
+  background:conic-gradient(from 180deg, var(--accent), var(--accent2), var(--accent3));
+  box-shadow:0 0 12px rgba(122,162,255,.6)
+}
+.range-glow{appearance:none;height:6px;border-radius:6px;background:#2a2f4d}
+</style>
 </head>
-<body>
-    <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <div class="logo">
-                <div class="logo-icon">🛠️</div>
-                <div>
-                    <h1>RewaTool Pro</h1>
-                    <p>300+ Tools • 100% Free</p>
-                </div>
-            </div>
-            
-            <nav class="nav">
-                <a href="#home" class="active"><i class="fas fa-home"></i> Home</a>
-                <a href="#categories"><i class="fas fa-th-large"></i> Categories</a>
-                <a href="#tools"><i class="fas fa-tools"></i> All Tools</a>
-                <a href="#features"><i class="fas fa-star"></i> Features</a>
-                <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
-            </nav>
-            
-            <div class="header-right">
-                <button class="theme-toggle" id="themeToggle">
-                    <i class="fas fa-moon"></i>
-                </button>
-                <button class="btn-login">
-                    <i class="fas fa-user"></i> Login
-                </button>
-            </div>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Transform Your Work with <span class="highlight">300+ Professional Tools</span></h1>
-                <p class="subtitle">Completely Free Forever • No Watermarks • No Premium • No Limits</p>
-                
-                <div class="stats">
-                    <div class="stat">
-                        <div class="stat-icon">🔧</div>
-                        <div class="stat-info">
-                            <h3>300+</h3>
-                            <p>Tools</p>
-                        </div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-icon">⚡</div>
-                        <div class="stat-info">
-                            <h3>&lt;1s</h3>
-                            <p>Load Time</p>
-                        </div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-icon">🌍</div>
-                        <div class="stat-info">
-                            <h3>50+</h3>
-                            <p>Languages</p>
-                        </div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-icon">🆓</div>
-                        <div class="stat-info">
-                            <h3>100%</h3>
-                            <p>Free</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="hero-buttons">
-                    <button class="btn-primary" id="exploreTools">
-                        <i class="fas fa-rocket"></i> Explore All Tools
-                    </button>
-                    <button class="btn-secondary" id="viewCategories">
-                        <i class="fas fa-th-large"></i> Browse Categories
-                    </button>
-                </div>
-            </div>
-            
-            <!-- AdSense Banner 1 -->
-            <div class="ad-banner ad-728x90">
-                <!-- AdSense Code Here -->
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-XXXXXXXXXXXXXXX"
-                     data-ad-slot="1234567890"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
-                <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-            </div>
-        </div>
-    </section>
-
-    <!-- Categories Section -->
-    <section class="categories" id="categories">
-        <div class="container">
-            <h2 class="section-title">30 Professional Categories</h2>
-            <p class="section-subtitle">Browse tools by category. Click any category to see all tools in it.</p>
-            
-            <div class="categories-grid" id="categoriesContainer">
-                <!-- Categories loaded by JavaScript -->
-            </div>
-            
-            <!-- AdSense Banner 2 -->
-            <div class="ad-banner ad-300x250">
-                <!-- AdSense Code Here -->
-                <ins class="adsbygoogle"
-                     style="display:inline-block;width:300px;height:250px"
-                     data-ad-client="ca-pub-XXXXXXXXXXXXXXX"
-                     data-ad-slot="0987654321"></ins>
-                <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-            </div>
-        </div>
-    </section>
-
-    <!-- Tools Section -->
-    <section class="tools" id="tools">
-        <div class="container">
-            <div class="tools-header">
-                <h2 class="section-title">All Professional Tools (300+)</h2>
-                <div class="search-box">
-                    <i class="fas fa-search"></i>
-                    <input type="text" id="searchInput" placeholder="Search 300+ tools...">
-                </div>
-            </div>
-            
-            <div class="tools-grid" id="toolsContainer">
-                <!-- Tools loaded by JavaScript -->
-            </div>
-            
-            <div class="pagination">
-                <button class="page-btn active">1</button>
-                <button class="page-btn">2</button>
-                <button class="page-btn">3</button>
-                <span>...</span>
-                <button class="page-btn">30</button>
-                <button class="page-btn next">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section class="features" id="features">
-        <div class="container">
-            <h2 class="section-title">Why Choose RewaTool Pro?</h2>
-            
-            <div class="features-grid">
-                <div class="feature">
-                    <div class="feature-icon">
-                        <i class="fas fa-bolt"></i>
-                    </div>
-                    <h3>Lightning Fast</h3>
-                    <p>Process files in seconds with our optimized engine. No waiting, instant results.</p>
-                </div>
-                
-                <div class="feature">
-                    <div class="feature-icon">
-                        <i class="fas fa-robot"></i>
-                    </div>
-                    <h3>AI Powered</h3>
-                    <p>Smart AI features in every tool for enhanced processing and suggestions.</p>
-                </div>
-                
-                <div class="feature">
-                    <div class="feature-icon">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <h3>Mobile First</h3>
-                    <p>Perfect experience on all devices. Install as PWA for app-like experience.</p>
-                </div>
-                
-                <div class="feature">
-                    <div class="feature-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h3>Secure & Private</h3>
-                    <p>Your files are processed securely and deleted automatically after 1 hour.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Tool Workspace (Hidden) -->
-    <div class="tool-workspace" id="toolWorkspace">
-        <div class="workspace-header">
-            <div class="workspace-left">
-                <button class="back-btn" id="closeWorkspace">
-                    <i class="fas fa-arrow-left"></i> Back
-                </button>
-                <h2 id="toolTitle">Tool Name</h2>
-            </div>
-            <div class="workspace-right">
-                <button class="workspace-btn">
-                    <i class="fas fa-save"></i>
-                </button>
-                <button class="workspace-btn">
-                    <i class="fas fa-cog"></i>
-                </button>
-                <button class="workspace-btn">
-                    <i class="fas fa-expand"></i>
-                </button>
-            </div>
-        </div>
-        
-        <div class="workspace-content">
-            <!-- Left Panel -->
-            <div class="panel left-panel">
-                <h3><i class="fas fa-upload"></i> Upload Files</h3>
-                <div class="upload-area" id="uploadArea">
-                    <i class="fas fa-cloud-upload-alt"></i>
-                    <p>Drag & drop files here</p>
-                    <p class="upload-sub">or click to browse (Max: 500MB)</p>
-                    <input type="file" id="fileInput" multiple>
-                </div>
-                
-                <div class="settings">
-                    <h3><i class="fas fa-sliders-h"></i> Settings</h3>
-                    <div class="setting-item">
-                        <label>Quality:</label>
-                        <select id="qualitySelect">
-                            <option>High (Recommended)</option>
-                            <option>Medium</option>
-                            <option>Low</option>
-                        </select>
-                    </div>
-                    <div class="setting-item">
-                        <label>Format:</label>
-                        <select id="formatSelect">
-                            <option>Original</option>
-                            <option>PDF</option>
-                            <option>DOCX</option>
-                            <option>JPG</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Center Panel -->
-            <div class="panel center-panel">
-                <h3><i class="fas fa-play-circle"></i> Processing</h3>
-                <div class="processing-area">
-                    <div class="progress-container" id="progressContainer">
-                        <div class="progress-bar" id="progressBar"></div>
-                        <div class="progress-text">
-                            <span>Processing...</span>
-                            <span id="progressPercent">0%</span>
-                        </div>
-                    </div>
-                    
-                    <button class="process-btn" id="processBtn">
-                        <i class="fas fa-bolt"></i> Process Now
-                    </button>
-                    
-                    <!-- AdSense in Tool -->
-                    <div class="tool-ad ad-468x60">
-                        <!-- AdSense Code Here -->
-                        <ins class="adsbygoogle"
-                             style="display:block"
-                             data-ad-client="ca-pub-XXXXXXXXXXXXXXX"
-                             data-ad-slot="1122334455"
-                             data-ad-format="horizontal"
-                             data-full-width-responsive="true"></ins>
-                        <script>
-                            (adsbygoogle = window.adsbygoogle || []).push({});
-                        </script>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Right Panel -->
-            <div class="panel right-panel">
-                <h3><i class="fas fa-eye"></i> Preview</h3>
-                <div class="preview-area" id="previewArea">
-                    <div class="preview-placeholder">
-                        <i class="fas fa-file-alt"></i>
-                        <p>Output will appear here</p>
-                    </div>
-                </div>
-                
-                <div class="download-section" id="downloadSection">
-                    <h3><i class="fas fa-download"></i> Download</h3>
-                    <button class="download-btn" id="downloadBtn">
-                        <i class="fas fa-file-download"></i> Download Result
-                    </button>
-                    <div class="share-options">
-                        <button class="share-btn">
-                            <i class="fas fa-link"></i> Get Link
-                        </button>
-                        <button class="share-btn">
-                            <i class="fas fa-envelope"></i> Email
-                        </button>
-                        <button class="share-btn">
-                            <i class="fas fa-share-alt"></i> Share
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
+<body class="theme-royal">
+<header class="header">
+  <div class="brand">
+    <div class="logo"></div>
+    <div>
+      <div class="title">rewatool.online</div>
+      <div class="sub">Premium animated theme • Free, fast, professional</div>
     </div>
+  </div>
+  <div class="nav">
+    <select id="themeSelect" class="btn" title="Theme">
+      <option value="theme-royal">Royal</option>
+      <option value="theme-ocean">Ocean</option>
+      <option value="theme-sunset">Sunset</option>
+    </select>
+    <button class="btn" id="btnAbout">About</button>
+  </div>
+</header>
 
-    <!-- Category Page (Hidden) -->
-    <div class="category-page" id="categoryPage">
-        <div class="category-header">
-            <button class="back-btn" id="closeCategory">
-                <i class="fas fa-arrow-left"></i> Back to Categories
-            </button>
-            <h2 id="categoryTitle">Category Name</h2>
-        </div>
-        
-        <div class="container">
-            <div class="category-info">
-                <div class="category-stats">
-                    <span><i class="fas fa-tools"></i> <span id="toolCount">25</span> Tools</span>
-                    <span><i class="fas fa-star"></i> 4.8 Rating</span>
-                    <span><i class="fas fa-bolt"></i> <2s Processing</span>
-                </div>
-                <p id="categoryDescription">Professional tools for all your needs.</p>
-            </div>
-            
-            <div class="category-tools-grid" id="categoryToolsContainer">
-                <!-- Category tools loaded here -->
-            </div>
-            
-            <!-- AdSense in Category Page -->
-            <div class="ad-banner ad-728x90">
-                <!-- AdSense Code Here -->
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-XXXXXXXXXXXXXXX"
-                     data-ad-slot="5566778899"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
-                <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-            </div>
-        </div>
+<section class="hero">
+  <h1>Paid‑level polish—free, no login, no watermark</h1>
+  <p>Animated gradients, glassmorphism, micro‑interactions, AdSense‑ready layout. Tools plug in later.</p>
+</section>
+
+<main class="container">
+  <!-- Top Ad -->
+  <section class="card ad fade-in">
+    <div class="label">Ad slot (Top banner)</div>
+    <!-- Place your AdSense code here when approved -->
+    <div>Placeholder — 728x90 / responsive</div>
+  </section>
+
+  <!-- Highlights -->
+  <section class="card fade-in">
+    <div class="row" style="justify-content:space-between">
+      <div class="badge">Zero friction: Upload → Process → Download</div>
+      <div class="badge">Mobile‑friendly • Animated UI • Ad‑safe</div>
+      <div class="badge">Distinct dashboards per tool</div>
     </div>
+  </section>
 
-    <!-- Footer -->
-    <footer class="footer" id="contact">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <h3>RewaTool Pro</h3>
-                    <p>300+ Professional Tools</p>
-                    <p>100% Free Forever</p>
-                    <p>No Premium, No Limits</p>
-                    <div class="social">
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-github"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-                
-                <div class="footer-col">
-                    <h3>Quick Links</h3>
-                    <a href="#">Home</a>
-                    <a href="#">All Tools</a>
-                    <a href="#">Categories</a>
-                    <a href="#">Features</a>
-                    <a href="#">Contact</a>
-                </div>
-                
-                <div class="footer-col">
-                    <h3>Top Categories</h3>
-                    <a href="#">PDF Tools</a>
-                    <a href="#">Image Tools</a>
-                    <a href="#">Video Tools</a>
-                    <a href="#">AI Tools</a>
-                    <a href="#">Web Tools</a>
-                </div>
-                
-                <div class="footer-col">
-                    <h3>Legal</h3>
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
-                    <a href="#">Cookie Policy</a>
-                    <a href="#">Disclaimer</a>
-                    <a href="#">Contact Us</a>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>© 2024 RewaTool Pro. All tools are 100% free forever.</p>
-                <p>Contact: toolsshahbaz@gmail.com | khursedansari505@gmail.com</p>
-                <p>For business inquiries: partnerships@rewatool.com</p>
-                
-                <!-- Footer Ad -->
-                <div class="footer-ad ad-728x90">
-                    <!-- AdSense Code Here -->
-                    <ins class="adsbygoogle"
-                         style="display:block"
-                         data-ad-client="ca-pub-XXXXXXXXXXXXXXX"
-                         data-ad-slot="9988776655"
-                         data-ad-format="auto"
-                         data-full-width-responsive="true"></ins>
-                    <script>
-                        (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
-                </div>
-            </div>
+  <!-- Tool grid (placeholders; connect later) -->
+  <section class="card card-solid fade-in">
+    <div class="grid">
+      <div class="card tool-card">
+        <h3>Magic Background Remover</h3>
+        <p>Remove background, add solid/gradient, soft edges—instant PNG.</p>
+        <div class="actions">
+          <button class="btn" data-open="bg">Open</button>
+          <span class="badge">Free</span>
         </div>
-    </footer>
+      </div>
+      <div class="card tool-card">
+        <h3>Face Enhancer (Lite)</h3>
+        <p>One‑click quality boost, presets, compare slider, small upscale.</p>
+        <div class="actions">
+          <button class="btn" data-open="enh">Open</button>
+          <span class="badge">Free</span>
+        </div>
+      </div>
+      <div class="card tool-card">
+        <h3>Image Compressor</h3>
+        <p>Reduce size with quality slider—fast, web‑ready JPG.</p>
+        <div class="actions">
+          <button class="btn" data-open="comp">Open</button>
+          <span class="badge">Free</span>
+        </div>
+      </div>
+      <div class="card tool-card">
+        <h3>Image Converter</h3>
+        <p>Convert PNG/JPG/WebP—simple, instant download.</p>
+        <div class="actions">
+          <button class="btn" data-open="conv">Open</button>
+          <span class="badge">Free</span>
+        </div>
+      </div>
+      <div class="card tool-card">
+        <h3>Watermark & Brand Kit</h3>
+        <p>Add text/logo watermark—position presets, opacity, brand colors.</p>
+        <div class="actions">
+          <button class="btn" data-open="wm">Open</button>
+          <span class="badge">Free</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <script src="script.js"></script>
+  <!-- Bottom Ad -->
+  <section class="card ad fade-in">
+    <div class="label">Ad slot (Bottom banner)</div>
+    <!-- Place your AdSense code here when approved -->
+    <div>Placeholder — 728x90 / responsive</div>
+  </section>
+</main>
+
+<footer class="footer">© rewatool.online — Built for speed, clarity, and trust.</footer>
+
+<!-- Modal host -->
+<div class="modal" id="modal">
+  <div class="sheet glow">
+    <div class="head">
+      <h2 id="modalTitle">Tool</h2>
+      <div class="row">
+        <button class="btn" id="btnHelp">Help</button>
+        <button class="btn" id="btnClose">Close</button>
+      </div>
+    </div>
+    <div class="body" id="modalBody">
+      <section class="card">
+        <div class="tabbar">
+          <button class="tab active">Overview</button>
+          <button class="tab">Controls</button>
+          <button class="tab">Preview</button>
+        </div>
+        <div class="row" style="margin-top:8px">
+          <div class="badge">Status: Ready</div>
+          <div class="badge">Tip: Keep images 1000–1500px for speed</div>
+        </div>
+      </section>
+      <section class="card">
+        <div class="meter"><div class="fill" id="fill"></div></div>
+        <small class="status" id="status">Idle</small>
+      </section>
+      <section class="card preview">
+        <div class="panel"><h4>Original</h4><img id="orig" /></div>
+        <div class="panel"><h4>Result</h4><img id="result" /></div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<script>
+/* Theme switcher */
+const themeSelect=document.getElementById('themeSelect');
+themeSelect.addEventListener('change',()=>{
+  document.body.classList.remove('theme-royal','theme-ocean','theme-sunset');
+  document.body.classList.add(themeSelect.value);
+});
+
+/* Global UI */
+const modal=document.getElementById('modal');
+const modalTitle=document.getElementById('modalTitle');
+const modalBody=document.getElementById('modalBody');
+document.querySelectorAll('[data-open]').forEach(btn=>{
+  btn.addEventListener('click',()=>openTool(btn.getAttribute('data-open')));
+});
+document.getElementById('btnClose').addEventListener('click',()=>modal.classList.remove('open'));
+document.getElementById('btnAbout').addEventListener('click',()=>alert('rewatool.online — Premium animated theme. Tools plug in later. No login, no watermark.'));
+document.getElementById('btnHelp').addEventListener('click',()=>alert('Upload → Process → Preview → Download. Minimal steps, instant results.'));
+
+/* Status meter */
+function setStatus(text,pct=null){
+  const statusEl=document.getElementById('status');
+  const fill=document.getElementById('fill');
+  if(statusEl) statusEl.textContent=text;
+  if(fill && pct!==null) fill.style.width=pct+'%';
+}
+
+/* Router (only modal content/title; tools will inject later) */
+function openTool(key){
+  modal.classList.add('open');
+  const names={bg:'Magic Background Remover',enh:'Face Enhancer (Lite)',comp:'Image Compressor',conv:'Image Converter',wm:'Watermark & Brand Kit'};
+  modalTitle.textContent=names[key]||'Tool';
+  setStatus('Idle',0);
+}
+
+/* Escape to close */
+document.addEventListener('keydown',(e)=>{ if(e.key==='Escape') modal.classList.remove('open'); });
+</script>
 </body>
-    </html>
+</html>
