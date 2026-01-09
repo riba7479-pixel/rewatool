@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <title>rewatool — Free Pro Image Tools</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="description" content="Make paid-level edits free. Animated, premium UX. No login, no watermark." />
+<meta name="description" content="Cinematic, premium animated homepage for rewatool — free, fast, professional image tools. No login, no watermark." />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
 <style>
 /* ===== Premium color system ===== */
@@ -27,13 +27,18 @@ body{
   background-attachment:fixed;
   overflow-x:hidden;
 }
+
+/* ===== Global links/buttons ===== */
 a{color:var(--accent);text-decoration:none}
 a:hover{text-decoration:underline}
 button,input,select{font-family:inherit}
 
-/* ===== Animated header ===== */
+/* ===== Particle canvas (ambient motion) ===== */
+#particles{position:fixed;inset:0;z-index:0}
+
+/* ===== Header (glass + animated logo) ===== */
 .header{
-  position:sticky;top:0;z-index:100;
+  position:sticky;top:0;z-index:50;
   display:flex;justify-content:space-between;align-items:center;
   padding:16px 22px;
   backdrop-filter:blur(12px);
@@ -42,17 +47,17 @@ button,input,select{font-family:inherit}
 }
 .brand{display:flex;align-items:center;gap:14px}
 .logo{
-  width:36px;height:36px;border-radius:12px;
+  width:38px;height:38px;border-radius:12px;
   background:conic-gradient(from 180deg, var(--accent), var(--accent2), var(--accent3), var(--accent));
   box-shadow:0 0 28px rgba(122,162,255,.35);
   animation:spin 7s linear infinite;
 }
 @keyframes spin{to{transform:rotate(360deg)}}
-.title{font-weight:900;letter-spacing:.5px}
+.title{font-weight:900;letter-spacing:.6px}
 .sub{font-size:12px;color:var(--muted)}
 .nav{display:flex;gap:10px}
 
-/* ===== Magnetic buttons ===== */
+/* ===== Magnetic buttons + cursor glow ===== */
 .btn{
   background:linear-gradient(180deg, rgba(26,31,53,.95), rgba(26,31,53,.75));
   color:var(--text);
@@ -69,17 +74,32 @@ button,input,select{font-family:inherit}
   transition:opacity .2s ease;opacity:.0;pointer-events:none;
 }
 .btn:hover::after{opacity:.8}
+.cursor-glow{
+  position:fixed;left:0;top:0;width:24px;height:24px;border-radius:50%;
+  pointer-events:none;z-index:5;
+  background:radial-gradient(12px 12px at 50% 50%, rgba(122,162,255,.35), transparent);
+  transform:translate(-50%,-50%);
+}
 
-/* ===== Hero (parallax + wave) ===== */
+/* ===== Hero (cinematic typography + wave shimmer + parallax) ===== */
 .hero{
   position:relative;overflow:hidden;
-  padding:64px 20px;text-align:center;
+  padding:72px 20px;text-align:center;z-index:1;
 }
-.hero h1{margin:0 0 12px;font-size:34px;letter-spacing:.3px}
-.hero p{margin:0;color:var(--muted)}
+.hero .brandline{display:flex;justify-content:center;gap:10px;align-items:center;margin-bottom:10px}
+.hero .brandline .dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2))}
+.hero h1{
+  margin:0;font-size:56px;letter-spacing:1.2px;line-height:1.05;
+  background:linear-gradient(90deg,var(--accent),var(--accent2),var(--accent3));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 6px 18px rgba(122,162,255,.25));
+}
+.hero h1 .char{opacity:0;transform:translateY(18px);display:inline-block}
+.hero p{margin:12px 0 0;color:var(--muted);font-size:16px}
+.hero .cta{margin-top:18px;display:flex;justify-content:center;gap:12px}
 .hero .wave{
   position:absolute;left:50%;transform:translateX(-50%);
-  bottom:-40px;width:140vw;height:220px;opacity:.35;filter:blur(6px);
+  bottom:-40px;width:160vw;height:260px;opacity:.35;filter:blur(6px);
   background:
     radial-gradient(800px 200px at 20% 50%, rgba(122,162,255,.35), transparent),
     radial-gradient(800px 200px at 80% 50%, rgba(0,212,255,.35), transparent);
@@ -90,7 +110,18 @@ button,input,select{font-family:inherit}
   100%{transform:translateX(-50%) translateY(-12px)}
 }
 
-/* ===== Sections ===== */
+/* ===== Marquee strip (brand trust) ===== */
+.marquee{
+  position:relative;overflow:hidden;margin:16px auto;max-width:1200px;
+  border:1px solid var(--glass-border);border-radius:12px;background:var(--glass)
+}
+.marquee .track{
+  display:flex;gap:28px;white-space:nowrap;animation:marq 18s linear infinite;
+  padding:10px 16px;color:var(--muted)
+}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+/* ===== Sections & cards ===== */
 .container{max-width:1200px;margin:0 auto;padding:18px;display:grid;gap:18px}
 .card{
   background:var(--glass);
@@ -105,9 +136,9 @@ button,input,select{font-family:inherit}
 @media(max-width:1100px){.grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:750px){.grid{grid-template-columns:1fr}}
 
-/* ===== Tool cards (reveal + hover glow) ===== */
-.tool-card{position:relative;overflow:hidden;transform:translateY(12px);opacity:0}
-.tool-card.reveal{transform:none;opacity:1;transition:transform .5s ease, opacity .5s ease}
+/* ===== Tool cards (scroll reveal + hover glow) ===== */
+.tool-card{position:relative;overflow:hidden;transform:translateY(16px);opacity:0}
+.tool-card.reveal{transform:none;opacity:1;transition:transform .6s ease, opacity .6s ease}
 .tool-card h3{margin:0 0 6px}
 .tool-card p{margin:0;color:var(--muted)}
 .tool-card .actions{margin-top:12px;display:flex;gap:10px;flex-wrap:wrap}
@@ -135,7 +166,7 @@ button,input,select{font-family:inherit}
 /* ===== Footer ===== */
 .footer{text-align:center;padding:20px;color:var(--muted);border-top:1px solid var(--glass-border)}
 
-/* ===== Modal ===== */
+/* ===== Modal shell ===== */
 .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.55);z-index:200}
 .modal.open{display:flex}
 .sheet{
@@ -146,47 +177,22 @@ button,input,select{font-family:inherit}
 .sheet .head h2{margin:0;font-size:18px}
 .sheet .body{padding:14px 18px;display:grid;gap:14px}
 
-/* ===== Panels & preview ===== */
-.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-.panel{background:linear-gradient(180deg, rgba(18,21,40,.95), rgba(18,21,40,.75));border-radius:16px;padding:12px;position:relative;overflow:hidden}
-.panel h4{margin:0 0 8px;color:var(--muted)}
-.panel img,.panel canvas{width:100%;border-radius:12px;display:block}
-.preview{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-@media(max-width:900px){.preview{grid-template-columns:1fr}}
-
 /* ===== Meter & status ===== */
 .meter{height:10px;background:rgba(26,31,53,.85);border-radius:10px;overflow:hidden}
 .fill{height:100%;width:0;background:linear-gradient(90deg, var(--accent), var(--accent2), var(--accent3));transition:width .3s}
 small.status{color:var(--muted)}
-
-/* ===== Tabs ===== */
-.tabbar{display:flex;gap:10px;flex-wrap:wrap}
-.tab{
-  background:linear-gradient(180deg, rgba(26,31,53,.95), rgba(26,31,53,.75));
-  border:1px solid var(--glass-border);color:var(--text);
-  padding:8px 12px;border-radius:12px;cursor:pointer;transition:border-color .2s ease, box-shadow .2s ease
-}
-.tab.active{border-color:var(--accent);box-shadow:0 0 14px rgba(122,162,255,.35)}
-
-/* ===== Micro animations ===== */
-.fade-in{animation:fadeIn .35s ease}
-@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.glow{box-shadow:0 0 32px rgba(122,162,255,.28)}
-.range-glow::-webkit-slider-thumb{
-  appearance:none;width:18px;height:18px;border-radius:50%;
-  background:conic-gradient(from 180deg, var(--accent), var(--accent2), var(--accent3));
-  box-shadow:0 0 12px rgba(122,162,255,.6)
-}
-.range-glow{appearance:none;height:6px;border-radius:6px;background:#2a2f4d}
 </style>
 </head>
 <body>
+<canvas id="particles"></canvas>
+<div class="cursor-glow" id="cursorGlow"></div>
+
 <header class="header">
   <div class="brand">
     <div class="logo"></div>
     <div>
       <div class="title">rewatool</div>
-      <div class="sub">Premium animated experience • Free, fast, professional</div>
+      <div class="sub">Cinematic premium experience • Free, fast, professional</div>
     </div>
   </div>
   <div class="nav">
@@ -196,30 +202,37 @@ small.status{color:var(--muted)}
 </header>
 
 <section class="hero">
-  <h1>Paid‑level polish—free, no login, no watermark</h1>
-  <p>Animated gradients, parallax motion, micro‑interactions, glass panels. Tools plug in later.</p>
+  <div class="brandline"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+  <h1 id="heroTitle">r e w a t o o l</h1>
+  <p>Open free. No login. No watermark. Built for speed, clarity, and trust.</p>
+  <div class="cta">
+    <button class="btn" id="btnOpen">Open Free</button>
+    <button class="btn" id="btnExplore">Explore Tools</button>
+  </div>
   <div class="wave"></div>
+</section>
+
+<section class="marquee">
+  <div class="track">Premium UX • Animated Logo • Ambient Motion • Micro‑interactions • Parallax • Scroll Reveal • Glass Panels • Premium Gradients • Ad‑ready • Fast • Mobile‑friendly • Premium UX • Animated Logo • Ambient Motion • Micro‑interactions • Parallax • Scroll Reveal • Glass Panels • Premium Gradients • Ad‑ready • Fast • Mobile‑friendly</div>
 </section>
 
 <main class="container">
   <!-- Top Ad -->
-  <section class="card ad fade-in">
+  <section class="card ad">
     <div class="label">Ad slot (Top banner)</div>
     <!-- Place your AdSense code here when approved -->
     <div>Placeholder — 728x90 / responsive</div>
   </section>
 
   <!-- Highlights -->
-  <section class="card fade-in">
-    <div class="row" style="justify-content:space-between">
-      <div class="badge">Zero friction: Upload → Process → Download</div>
-      <div class="badge">Mobile‑friendly • Animated UI • Ad‑safe</div>
-      <div class="badge">Distinct dashboards per tool</div>
-    </div>
+  <section class="card">
+    <div class="badge">Zero friction: Upload → Process → Download</div>
+    <div class="badge">Mobile‑friendly • Animated UI • Ad‑safe</div>
+    <div class="badge">Distinct dashboards per tool</div>
   </section>
 
   <!-- Tool grid (placeholders; connect later) -->
-  <section class="card card-solid fade-in">
+  <section class="card card-solid">
     <div class="grid">
       <div class="card tool-card">
         <h3>Magic Background Remover</h3>
@@ -265,18 +278,18 @@ small.status{color:var(--muted)}
   </section>
 
   <!-- Bottom Ad -->
-  <section class="card ad fade-in">
+  <section class="card ad">
     <div class="label">Ad slot (Bottom banner)</div>
     <!-- Place your AdSense code here when approved -->
     <div>Placeholder — 728x90 / responsive</div>
   </section>
 </main>
 
-<footer class="footer">© rewatool — Built for speed, clarity, and trust.</footer>
+<footer class="footer">© rewatool — Cinematic, premium, and free. No login. No watermark.</footer>
 
-<!-- Modal host -->
+<!-- Modal shell -->
 <div class="modal" id="modal">
-  <div class="sheet glow">
+  <div class="sheet">
     <div class="head">
       <h2 id="modalTitle">Tool</h2>
       <div class="row">
@@ -286,30 +299,18 @@ small.status{color:var(--muted)}
     </div>
     <div class="body" id="modalBody">
       <section class="card">
-        <div class="tabbar">
-          <button class="tab active">Overview</button>
-          <button class="tab">Controls</button>
-          <button class="tab">Preview</button>
-        </div>
-        <div class="row" style="margin-top:8px">
-          <div class="badge">Status: Ready</div>
-          <div class="badge">Tip: Keep images 1000–1500px for speed</div>
-        </div>
-      </section>
-      <section class="card">
         <div class="meter"><div class="fill" id="fill"></div></div>
         <small class="status" id="status">Idle</small>
       </section>
-      <section class="card preview">
-        <div class="panel"><h4>Original</h4><img id="orig" /></div>
-        <div class="panel"><h4>Result</h4><img id="result" /></div>
+      <section class="card">
+        <p style="color:var(--muted)">Upload → Process → Preview → Download. Tools plug in here later.</p>
       </section>
     </div>
   </div>
 </div>
 
 <script>
-/* Magnetic hover for buttons */
+/* ===== Magnetic hover for buttons ===== */
 document.querySelectorAll('.btn').forEach(btn=>{
   btn.addEventListener('mousemove',e=>{
     const r=btn.getBoundingClientRect();
@@ -320,24 +321,37 @@ document.querySelectorAll('.btn').forEach(btn=>{
   });
 });
 
-/* Scroll reveal for tool cards */
+/* ===== Cursor glow ===== */
+const glow=document.getElementById('cursorGlow');
+document.addEventListener('mousemove',(e)=>{
+  glow.style.left=e.clientX+'px';
+  glow.style.top=e.clientY+'px';
+});
+
+/* ===== Scroll reveal for tool cards ===== */
 const observer=new IntersectionObserver((entries)=>{
   entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('reveal'); });
 },{threshold:.15});
 document.querySelectorAll('.tool-card').forEach(el=>observer.observe(el));
 
-/* Global UI */
+/* ===== Modal router ===== */
 const modal=document.getElementById('modal');
 const modalTitle=document.getElementById('modalTitle');
-const modalBody=document.getElementById('modalBody');
+function openTool(key){
+  modal.classList.add('open');
+  const names={bg:'Magic Background Remover',enh:'Face Enhancer (Lite)',comp:'Image Compressor',conv:'Image Converter',wm:'Watermark & Brand Kit'};
+  modalTitle.textContent=names[key]||'Tool';
+  setStatus('Idle',0);
+}
 document.querySelectorAll('[data-open]').forEach(btn=>{
   btn.addEventListener('click',()=>openTool(btn.getAttribute('data-open')));
 });
 document.getElementById('btnClose').addEventListener('click',()=>modal.classList.remove('open'));
-document.getElementById('btnAbout').addEventListener('click',()=>alert('rewatool — Premium animated theme. Tools plug in later. No login, no watermark.'));
+document.getElementById('btnAbout').addEventListener('click',()=>alert('rewatool — Cinematic premium theme. Tools plug in later. No login, no watermark.'));
 document.getElementById('btnHelp').addEventListener('click',()=>alert('Upload → Process → Preview → Download. Minimal steps, instant results.'));
+document.addEventListener('keydown',(e)=>{ if(e.key==='Escape') modal.classList.remove('open'); });
 
-/* Status meter */
+/* ===== Status meter ===== */
 function setStatus(text,pct=null){
   const statusEl=document.getElementById('status');
   const fill=document.getElementById('fill');
@@ -345,16 +359,70 @@ function setStatus(text,pct=null){
   if(fill && pct!==null) fill.style.width=pct+'%';
 }
 
-/* Router (only modal content/title; tools will inject later) */
-function openTool(key){
-  modal.classList.add('open');
-  const names={bg:'Magic Background Remover',enh:'Face Enhancer (Lite)',comp:'Image Compressor',conv:'Image Converter',wm:'Watermark & Brand Kit'};
-  modalTitle.textContent=names[key]||'Tool';
-  setStatus('Idle',0);
-}
+/* ===== Hero animated typography (letter reveal) ===== */
+const heroTitle=document.getElementById('heroTitle');
+const text=heroTitle.textContent;
+heroTitle.textContent='';
+text.split('').forEach((ch,i)=>{
+  const span=document.createElement('span');
+  span.className='char';
+  span.textContent=ch;
+  heroTitle.appendChild(span);
+  setTimeout(()=>{ span.style.opacity=1; span.style.transform='translateY(0)'; span.style.transition='all .45s cubic-bezier(.2,.8,.2,1)'; }, 60*i);
+});
 
-/* Escape to close */
-document.addEventListener('keydown',(e)=>{ if(e.key==='Escape') modal.classList.remove('open'); });
+/* ===== Particle background ===== */
+const canvas=document.getElementById('particles');
+const ctx=canvas.getContext('2d');
+let W,H,particles=[];
+function resize(){ W=canvas.width=window.innerWidth; H=canvas.height=window.innerHeight; }
+window.addEventListener('resize',resize); resize();
+function makeParticles(n=80){
+  particles=[];
+  for(let i=0;i<n;i++){
+    particles.push({
+      x:Math.random()*W, y:Math.random()*H,
+      vx:(Math.random()-.5)*0.6, vy:(Math.random()-.5)*0.6,
+      r:Math.random()*2+0.6, a:Math.random()*0.6+0.2
+    });
+  }
+}
+makeParticles();
+function step(){
+  ctx.clearRect(0,0,W,H);
+  for(const p of particles){
+    p.x+=p.vx; p.y+=p.vy;
+    if(p.x<0||p.x>W) p.vx*=-1;
+    if(p.y<0||p.y>H) p.vy*=-1;
+    ctx.beginPath();
+    const grd=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*6);
+    grd.addColorStop(0,`rgba(122,162,255,${p.a})`);
+    grd.addColorStop(1,'transparent');
+    ctx.fillStyle=grd;
+    ctx.arc(p.x,p.y,p.r*6,0,Math.PI*2);
+    ctx.fill();
+  }
+  requestAnimationFrame(step);
+}
+step();
+
+/* ===== Parallax on scroll (hero wave + subtle header glow) ===== */
+const wave=document.querySelector('.hero .wave');
+window.addEventListener('scroll',()=>{
+  const y=window.scrollY;
+  wave.style.transform=`translateX(-50%) translateY(${Math.max(-12, -y*0.05)}px)`;
+});
+
+/* ===== “Open Free” CTA (entry animation + modal) ===== */
+document.getElementById('btnOpen').addEventListener('click',()=>{
+  setStatus('Welcome — tools will open here',50);
+  modal.classList.add('open');
+  modalTitle.textContent='Start Free';
+  setTimeout(()=>setStatus('Ready',100),600);
+});
+document.getElementById('btnExplore').addEventListener('click',()=>{
+  window.scrollTo({top:document.querySelector('.grid').getBoundingClientRect().top+window.scrollY-80,behavior:'smooth'});
+});
 </script>
 </body>
-</html
+</html>
