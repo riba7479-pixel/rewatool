@@ -2,39 +2,30 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>rewatool.online — Pro Animated Theme</title>
+<title>rewatool — Free Pro Image Tools</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="description" content="Premium animated theme for free image tools — pro UX/UI, rich color system, AdSense-ready." />
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
+<meta name="description" content="Make paid-level edits free. Animated, premium UX. No login, no watermark." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
 <style>
-/* ===== Color systems (switchable) ===== */
+/* ===== Premium color system ===== */
 :root{
-  --bg:#0a0f1f; --bg2:#0f1426; --panel:rgba(23,26,43,.75); --panel-solid:#171a2b;
-  --text:#e6e6f0; --muted:#9aa0b4;
+  --bg:#070a16; --bg2:#0c1022; --panel:rgba(22,26,46,.65); --panel-solid:#161a2e;
+  --text:#e8eaf6; --muted:#9aa0b4;
   --accent:#7aa2ff; --accent2:#00d4ff; --accent3:#9b72ff;
   --success:#2bd47d; --danger:#ff6b6b; --gold:#f5c518;
   --glass:rgba(255,255,255,.06); --glass-border:rgba(255,255,255,.12);
-  --shadow:0 10px 30px rgba(0,0,0,.35);
+  --shadow:0 18px 50px rgba(0,0,0,.45);
 }
-.theme-ocean{
-  --bg:#061a24; --bg2:#0b2430; --accent:#00bcd4; --accent2:#00e5ff; --accent3:#4dd0e1;
-}
-.theme-royal{
-  --bg:#0f0a1f; --bg2:#1a1333; --accent:#7c4dff; --accent2:#b388ff; --accent3:#9b72ff;
-}
-.theme-sunset{
-  --bg:#1a0f0f; --bg2:#2a1414; --accent:#ff7a7a; --accent2:#ffb36b; --accent3:#ffd36b;
-}
-
-/* ===== Base layout ===== */
 *{box-sizing:border-box}
 html,body{margin:0;height:100%}
 body{
   font-family:Inter,system-ui,Segoe UI,Arial;
   color:var(--text);
-  background: radial-gradient(1200px 600px at 10% 10%, var(--bg2), var(--bg)),
-              radial-gradient(1200px 600px at 90% 90%, var(--bg2), var(--bg));
-  background-attachment: fixed;
+  background:
+    radial-gradient(1200px 600px at 10% 10%, var(--bg2), var(--bg)),
+    radial-gradient(1200px 600px at 90% 90%, var(--bg2), var(--bg));
+  background-attachment:fixed;
+  overflow-x:hidden;
 }
 a{color:var(--accent);text-decoration:none}
 a:hover{text-decoration:underline}
@@ -42,76 +33,86 @@ button,input,select{font-family:inherit}
 
 /* ===== Animated header ===== */
 .header{
-  position:sticky;top:0;z-index:50;
+  position:sticky;top:0;z-index:100;
   display:flex;justify-content:space-between;align-items:center;
-  padding:14px 20px;
-  backdrop-filter: blur(10px);
-  background:linear-gradient(180deg, rgba(10,15,31,.75), rgba(10,15,31,.55));
+  padding:16px 22px;
+  backdrop-filter:blur(12px);
+  background:linear-gradient(180deg, rgba(7,10,22,.75), rgba(7,10,22,.55));
   border-bottom:1px solid var(--glass-border);
 }
-.brand{display:flex;align-items:center;gap:12px}
+.brand{display:flex;align-items:center;gap:14px}
 .logo{
-  width:32px;height:32px;border-radius:10px;
+  width:36px;height:36px;border-radius:12px;
   background:conic-gradient(from 180deg, var(--accent), var(--accent2), var(--accent3), var(--accent));
-  box-shadow:0 0 24px rgba(122,162,255,.35);
-  animation:spin 6s linear infinite;
+  box-shadow:0 0 28px rgba(122,162,255,.35);
+  animation:spin 7s linear infinite;
 }
 @keyframes spin{to{transform:rotate(360deg)}}
-.title{font-weight:800;letter-spacing:.4px}
+.title{font-weight:900;letter-spacing:.5px}
 .sub{font-size:12px;color:var(--muted)}
-.nav{display:flex;gap:8px}
+.nav{display:flex;gap:10px}
 
-/* ===== Buttons (micro-interactions) ===== */
+/* ===== Magnetic buttons ===== */
 .btn{
-  background:linear-gradient(180deg, rgba(26,31,53,.9), rgba(26,31,53,.7));
+  background:linear-gradient(180deg, rgba(26,31,53,.95), rgba(26,31,53,.75));
   color:var(--text);
   border:1px solid var(--glass-border);
-  border-radius:10px;padding:10px 14px;cursor:pointer;
-  transition:transform .12s ease, box-shadow .2s ease, border-color .2s ease;
+  border-radius:12px;padding:10px 14px;cursor:pointer;
+  transition:transform .12s ease, box-shadow .25s ease, border-color .2s ease;
+  position:relative;overflow:hidden;
 }
-.btn:hover{transform:translateY(-1px);border-color:var(--accent);box-shadow:0 8px 20px rgba(122,162,255,.25)}
+.btn:hover{transform:translateY(-1px);border-color:var(--accent);box-shadow:0 10px 24px rgba(122,162,255,.28)}
 .btn:active{transform:translateY(0);box-shadow:none}
+.btn::after{
+  content:"";position:absolute;inset:0;border-radius:12px;
+  background:radial-gradient(200px 80px at var(--mx,50%) var(--my,50%), rgba(122,162,255,.18), transparent);
+  transition:opacity .2s ease;opacity:.0;pointer-events:none;
+}
+.btn:hover::after{opacity:.8}
 
-/* ===== Hero (parallax + gradient shimmer) ===== */
+/* ===== Hero (parallax + wave) ===== */
 .hero{
   position:relative;overflow:hidden;
-  padding:40px 20px;text-align:center;
+  padding:64px 20px;text-align:center;
 }
-.hero h1{margin:0 0 10px;font-size:28px;letter-spacing:.2px}
+.hero h1{margin:0 0 12px;font-size:34px;letter-spacing:.3px}
 .hero p{margin:0;color:var(--muted)}
-.hero::before{
-  content:"";position:absolute;inset:-20%;z-index:-1;
-  background:radial-gradient(600px 300px at 30% 20%, rgba(122,162,255,.25), transparent),
-             radial-gradient(600px 300px at 70% 80%, rgba(0,212,255,.25), transparent);
-  animation:floatBg 12s ease-in-out infinite alternate;
+.hero .wave{
+  position:absolute;left:50%;transform:translateX(-50%);
+  bottom:-40px;width:140vw;height:220px;opacity:.35;filter:blur(6px);
+  background:
+    radial-gradient(800px 200px at 20% 50%, rgba(122,162,255,.35), transparent),
+    radial-gradient(800px 200px at 80% 50%, rgba(0,212,255,.35), transparent);
+  animation:wave 10s ease-in-out infinite alternate;
 }
-@keyframes floatBg{
-  0%{transform:translate3d(0,0,0)}
-  100%{transform:translate3d(0,-10px,0)}
+@keyframes wave{
+  0%{transform:translateX(-50%) translateY(0)}
+  100%{transform:translateX(-50%) translateY(-12px)}
 }
 
-/* ===== Cards (glassmorphism) ===== */
-.container{max-width:1200px;margin:0 auto;padding:16px;display:grid;gap:16px}
+/* ===== Sections ===== */
+.container{max-width:1200px;margin:0 auto;padding:18px;display:grid;gap:18px}
 .card{
   background:var(--glass);
   border:1px solid var(--glass-border);
-  border-radius:16px;padding:16px;
+  border-radius:18px;padding:18px;
   box-shadow:var(--shadow);
 }
 .card-solid{background:var(--panel-solid);border:1px solid #22263d}
 
 /* ===== Grid ===== */
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 @media(max-width:1100px){.grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:750px){.grid{grid-template-columns:1fr}}
 
-/* ===== Tool cards (animated hover) ===== */
-.tool-card{position:relative;overflow:hidden}
+/* ===== Tool cards (reveal + hover glow) ===== */
+.tool-card{position:relative;overflow:hidden;transform:translateY(12px);opacity:0}
+.tool-card.reveal{transform:none;opacity:1;transition:transform .5s ease, opacity .5s ease}
 .tool-card h3{margin:0 0 6px}
 .tool-card p{margin:0;color:var(--muted)}
-.tool-card .actions{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap}
+.tool-card .actions{margin-top:12px;display:flex;gap:10px;flex-wrap:wrap}
 .tool-card::after{
-  content:"";position:absolute;inset:0;border-radius:16px;
+  content:"";position:absolute;inset:0;border-radius:18px;
   background:linear-gradient(135deg, rgba(122,162,255,.12), rgba(0,212,255,.12));
   opacity:0;transition:opacity .25s ease;
 }
@@ -120,57 +121,57 @@ button,input,select{font-family:inherit}
 /* ===== Badges ===== */
 .badge{
   display:inline-block;padding:6px 10px;border-radius:999px;
-  background:linear-gradient(180deg, rgba(26,31,53,.9), rgba(26,31,53,.7));
+  background:linear-gradient(180deg, rgba(26,31,53,.95), rgba(26,31,53,.75));
   border:1px solid var(--glass-border);color:var(--muted);font-size:12px
 }
 
 /* ===== Ad slots ===== */
 .ad{
-  background:linear-gradient(180deg, rgba(11,14,26,.9), rgba(11,14,26,.7));
-  border:1px dashed var(--glass-border);border-radius:14px;padding:14px;text-align:center;color:#9aa0b4
+  background:linear-gradient(180deg, rgba(11,14,26,.95), rgba(11,14,26,.75));
+  border:1px dashed var(--glass-border);border-radius:16px;padding:16px;text-align:center;color:#9aa0b4
 }
 .ad .label{font-size:12px;color:var(--accent)}
 
 /* ===== Footer ===== */
-.footer{text-align:center;padding:18px;color:var(--muted);border-top:1px solid var(--glass-border)}
+.footer{text-align:center;padding:20px;color:var(--muted);border-top:1px solid var(--glass-border)}
 
 /* ===== Modal ===== */
-.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.55);z-index:100}
+.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.55);z-index:200}
 .modal.open{display:flex}
 .sheet{
   width:min(1000px,92vw);max-height:90vh;overflow:auto;
-  background:var(--glass);border:1px solid var(--glass-border);border-radius:18px;box-shadow:var(--shadow)
+  background:var(--glass);border:1px solid var(--glass-border);border-radius:20px;box-shadow:var(--shadow)
 }
-.sheet .head{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--glass-border)}
+.sheet .head{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;border-bottom:1px solid var(--glass-border)}
 .sheet .head h2{margin:0;font-size:18px}
-.sheet .body{padding:12px 16px;display:grid;gap:12px}
+.sheet .body{padding:14px 18px;display:grid;gap:14px}
 
 /* ===== Panels & preview ===== */
-.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-.panel{background:linear-gradient(180deg, rgba(18,21,40,.9), rgba(18,21,40,.7));border-radius:14px;padding:12px;position:relative;overflow:hidden}
+.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.panel{background:linear-gradient(180deg, rgba(18,21,40,.95), rgba(18,21,40,.75));border-radius:16px;padding:12px;position:relative;overflow:hidden}
 .panel h4{margin:0 0 8px;color:var(--muted)}
-.panel img,.panel canvas{width:100%;border-radius:10px;display:block}
+.panel img,.panel canvas{width:100%;border-radius:12px;display:block}
 .preview{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 @media(max-width:900px){.preview{grid-template-columns:1fr}}
 
 /* ===== Meter & status ===== */
-.meter{height:10px;background:rgba(26,31,53,.8);border-radius:8px;overflow:hidden}
+.meter{height:10px;background:rgba(26,31,53,.85);border-radius:10px;overflow:hidden}
 .fill{height:100%;width:0;background:linear-gradient(90deg, var(--accent), var(--accent2), var(--accent3));transition:width .3s}
 small.status{color:var(--muted)}
 
 /* ===== Tabs ===== */
-.tabbar{display:flex;gap:8px;flex-wrap:wrap}
+.tabbar{display:flex;gap:10px;flex-wrap:wrap}
 .tab{
-  background:linear-gradient(180deg, rgba(26,31,53,.9), rgba(26,31,53,.7));
+  background:linear-gradient(180deg, rgba(26,31,53,.95), rgba(26,31,53,.75));
   border:1px solid var(--glass-border);color:var(--text);
-  padding:6px 10px;border-radius:10px;cursor:pointer;transition:border-color .2s ease, box-shadow .2s ease
+  padding:8px 12px;border-radius:12px;cursor:pointer;transition:border-color .2s ease, box-shadow .2s ease
 }
-.tab.active{border-color:var(--accent);box-shadow:0 0 12px rgba(122,162,255,.35)}
+.tab.active{border-color:var(--accent);box-shadow:0 0 14px rgba(122,162,255,.35)}
 
 /* ===== Micro animations ===== */
-.fade-in{animation:fadeIn .25s ease}
-@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-.glow{box-shadow:0 0 28px rgba(122,162,255,.25)}
+.fade-in{animation:fadeIn .35s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.glow{box-shadow:0 0 32px rgba(122,162,255,.28)}
 .range-glow::-webkit-slider-thumb{
   appearance:none;width:18px;height:18px;border-radius:50%;
   background:conic-gradient(from 180deg, var(--accent), var(--accent2), var(--accent3));
@@ -179,28 +180,25 @@ small.status{color:var(--muted)}
 .range-glow{appearance:none;height:6px;border-radius:6px;background:#2a2f4d}
 </style>
 </head>
-<body class="theme-royal">
+<body>
 <header class="header">
   <div class="brand">
     <div class="logo"></div>
     <div>
-      <div class="title">rewatool.online</div>
-      <div class="sub">Premium animated theme • Free, fast, professional</div>
+      <div class="title">rewatool</div>
+      <div class="sub">Premium animated experience • Free, fast, professional</div>
     </div>
   </div>
   <div class="nav">
-    <select id="themeSelect" class="btn" title="Theme">
-      <option value="theme-royal">Royal</option>
-      <option value="theme-ocean">Ocean</option>
-      <option value="theme-sunset">Sunset</option>
-    </select>
+    <button class="btn" id="btnTheme">Theme</button>
     <button class="btn" id="btnAbout">About</button>
   </div>
 </header>
 
 <section class="hero">
   <h1>Paid‑level polish—free, no login, no watermark</h1>
-  <p>Animated gradients, glassmorphism, micro‑interactions, AdSense‑ready layout. Tools plug in later.</p>
+  <p>Animated gradients, parallax motion, micro‑interactions, glass panels. Tools plug in later.</p>
+  <div class="wave"></div>
 </section>
 
 <main class="container">
@@ -274,7 +272,7 @@ small.status{color:var(--muted)}
   </section>
 </main>
 
-<footer class="footer">© rewatool.online — Built for speed, clarity, and trust.</footer>
+<footer class="footer">© rewatool — Built for speed, clarity, and trust.</footer>
 
 <!-- Modal host -->
 <div class="modal" id="modal">
@@ -311,12 +309,22 @@ small.status{color:var(--muted)}
 </div>
 
 <script>
-/* Theme switcher */
-const themeSelect=document.getElementById('themeSelect');
-themeSelect.addEventListener('change',()=>{
-  document.body.classList.remove('theme-royal','theme-ocean','theme-sunset');
-  document.body.classList.add(themeSelect.value);
+/* Magnetic hover for buttons */
+document.querySelectorAll('.btn').forEach(btn=>{
+  btn.addEventListener('mousemove',e=>{
+    const r=btn.getBoundingClientRect();
+    const x=((e.clientX-r.left)/r.width*100).toFixed(2)+'%';
+    const y=((e.clientY-r.top)/r.height*100).toFixed(2)+'%';
+    btn.style.setProperty('--mx',x);
+    btn.style.setProperty('--my',y);
+  });
 });
+
+/* Scroll reveal for tool cards */
+const observer=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('reveal'); });
+},{threshold:.15});
+document.querySelectorAll('.tool-card').forEach(el=>observer.observe(el));
 
 /* Global UI */
 const modal=document.getElementById('modal');
@@ -326,7 +334,7 @@ document.querySelectorAll('[data-open]').forEach(btn=>{
   btn.addEventListener('click',()=>openTool(btn.getAttribute('data-open')));
 });
 document.getElementById('btnClose').addEventListener('click',()=>modal.classList.remove('open'));
-document.getElementById('btnAbout').addEventListener('click',()=>alert('rewatool.online — Premium animated theme. Tools plug in later. No login, no watermark.'));
+document.getElementById('btnAbout').addEventListener('click',()=>alert('rewatool — Premium animated theme. Tools plug in later. No login, no watermark.'));
 document.getElementById('btnHelp').addEventListener('click',()=>alert('Upload → Process → Preview → Download. Minimal steps, instant results.'));
 
 /* Status meter */
