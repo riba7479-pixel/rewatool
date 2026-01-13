@@ -1,453 +1,603 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<title>rewatool — Free Pro Image Tools</title>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="description" content="Cinematic homepage + premium dashboard for rewatool — free, fast, professional image tools. No login, no watermark." />
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
-<style>
-/* ===== Premium color system ===== */
-:root{
-  --bg:#070a16; --bg2:#0c1022; --panel:rgba(22,26,46,.65); --panel-solid:#161a2e;
-  --text:#e8eaf6; --muted:#9aa0b4;
-  --accent:#7aa2ff; --accent2:#00d4ff; --accent3:#9b72ff;
-  --success:#2bd47d; --danger:#ff6b6b; --gold:#f5c518;
-  --glass:rgba(255,255,255,.06); --glass-border:rgba(255,255,255,.12);
-  --shadow:0 18px 50px rgba(0,0,0,.45);
-}
-*{box-sizing:border-box}
-html,body{margin:0;height:100%}
-body{
-  font-family:Inter,system-ui,Segoe UI,Arial;
-  color:var(--text);
-  background:
-    radial-gradient(1200px 600px at 10% 10%, var(--bg2), var(--bg)),
-    radial-gradient(1200px 600px at 90% 90%, var(--bg2), var(--bg));
-  background-attachment:fixed;
-  overflow-x:hidden;
-}
-a{color:var(--accent);text-decoration:none}
-a:hover{text-decoration:underline}
-button,input,select{font-family:inherit}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ai REWATOOL - Powerful & Professional Tools</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
 
-/* ===== Shared components ===== */
-.card{background:var(--glass);border:1px solid var(--glass-border);border-radius:18px;padding:18px;box-shadow:var(--shadow)}
-.badge{display:inline-block;padding:6px 10px;border-radius:999px;background:linear-gradient(180deg, rgba(26,31,53,.95), rgba(26,31,53,.75));border:1px solid var(--glass-border);color:var(--muted);font-size:12px}
-.btn{background:linear-gradient(180deg, rgba(26,31,53,.95), rgba(26,31,53,.75));color:var(--text);border:1px solid var(--glass-border);border-radius:12px;padding:10px 14px;cursor:pointer;transition:transform .12s ease, box-shadow .25s ease, border-color .2s ease;position:relative;overflow:hidden}
-.btn:hover{transform:translateY(-1px);border-color:var(--accent);box-shadow:0 10px 24px rgba(122,162,255,.28)}
-.btn:active{transform:translateY(0);box-shadow:none}
-.btn::after{content:"";position:absolute;inset:0;border-radius:12px;background:radial-gradient(200px 80px at var(--mx,50%) var(--my,50%), rgba(122,162,255,.18), transparent);transition:opacity .2s ease;opacity:.0;pointer-events:none}
-.btn:hover::after{opacity:.8}
-.ad{background:linear-gradient(180deg, rgba(11,14,26,.95), rgba(11,14,26,.75));border:1px dashed var(--glass-border);border-radius:16px;padding:16px;text-align:center;color:#9aa0b4}
-.ad .label{font-size:12px;color:var(--accent)}
-.fade-in{animation:fadeIn .35s ease}
-@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-/* ===== Modal ===== */
-.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.55);z-index:200}
-.modal.open{display:flex}
-.sheet{width:min(1000px,92vw);max-height:90vh;overflow:auto;background:var(--glass);border:1px solid var(--glass-border);border-radius:20px;box-shadow:var(--shadow)}
-.sheet .head{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;border-bottom:1px solid var(--glass-border)}
-.sheet .head h2{margin:0;font-size:18px}
-.sheet .body{padding:14px 18px;display:grid;gap:14px}
-.meter{height:10px;background:rgba(26,31,53,.85);border-radius:10px;overflow:hidden}
-.fill{height:100%;width:0;background:linear-gradient(90deg, var(--accent), var(--accent2), var(--accent3));transition:width .3s}
-small.status{color:var(--muted)}
+        :root {
+            --primary-gradient: linear-gradient(135deg, #0c1a2d 0%, #152642 50%, #0e1b33 100%);
+            --neon-cyan: #00f3ff;
+            --neon-magenta: #ff00ff;
+            --neon-blue: #0066ff;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glow-intensity: 0.8;
+        }
 
-/* ===== View switch (homepage vs dashboard) ===== */
-.view{position:relative;min-height:100vh;opacity:0;pointer-events:none;transform:translateY(12px);transition:opacity .5s ease, transform .5s ease}
-.view.active{opacity:1;pointer-events:auto;transform:none}
+        body {
+            background: var(--primary-gradient);
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
 
-/* ===== Homepage ===== */
-#home canvas#particles{position:fixed;inset:0;z-index:0}
-.header{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:16px 22px;backdrop-filter:blur(12px);background:linear-gradient(180deg, rgba(7,10,22,.75), rgba(7,10,22,.55));border-bottom:1px solid var(--glass-border)}
-.brand{display:flex;align-items:center;gap:14px}
-.logo{width:38px;height:38px;border-radius:12px;background:conic-gradient(from 180deg, var(--accent), var(--accent2), var(--accent3), var(--accent));box-shadow:0 0 28px rgba(122,162,255,.35);animation:spin 7s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-.title{font-weight:900;letter-spacing:.6px}
-.sub{font-size:12px;color:var(--muted)}
-.nav{display:flex;gap:10px}
-.cursor-glow{position:fixed;left:0;top:0;width:24px;height:24px;border-radius:50%;pointer-events:none;z-index:5;background:radial-gradient(12px 12px at 50% 50%, rgba(122,162,255,.35), transparent);transform:translate(-50%,-50%)}
-.hero{position:relative;overflow:hidden;padding:72px 20px;text-align:center;z-index:1}
-.hero .brandline{display:flex;justify-content:center;gap:10px;align-items:center;margin-bottom:10px}
-.hero .brandline .dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2))}
-.hero h1{margin:0;font-size:56px;letter-spacing:1.2px;line-height:1.05;background:linear-gradient(90deg,var(--accent),var(--accent2),var(--accent3));-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 6px 18px rgba(122,162,255,.25))}
-.hero h1 .char{opacity:0;transform:translateY(18px);display:inline-block}
-.hero p{margin:12px 0 0;color:var(--muted);font-size:16px}
-.hero .cta{margin-top:18px;display:flex;justify-content:center;gap:12px}
-.hero .wave{position:absolute;left:50%;transform:translateX(-50%);bottom:-40px;width:160vw;height:260px;opacity:.35;filter:blur(6px);background:radial-gradient(800px 200px at 20% 50%, rgba(122,162,255,.35), transparent),radial-gradient(800px 200px at 80% 50%, rgba(0,212,255,.35), transparent);animation:wave 10s ease-in-out infinite alternate}
-@keyframes wave{0%{transform:translateX(-50%) translateY(0)}100%{transform:translateX(-50%) translateY(-12px)}}
-.marquee{position:relative;overflow:hidden;margin:16px auto;max-width:1200px;border:1px solid var(--glass-border);border-radius:12px;background:var(--glass)}
-.marquee .track{display:flex;gap:28px;white-space:nowrap;animation:marq 18s linear infinite;padding:10px 16px;color:var(--muted)}
-@keyframes marq{to{transform:translateX(-50%)}}
-.container{max-width:1200px;margin:0 auto;padding:18px;display:grid;gap:18px}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-@media(max-width:1100px){.grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:750px){.grid{grid-template-columns:1fr}}
-.tool-card{position:relative;overflow:hidden;transform:translateY(16px);opacity:0}
-.tool-card.reveal{transform:none;opacity:1;transition:transform .6s ease, opacity .6s ease}
-.tool-card::after{content:"";position:absolute;inset:0;border-radius:18px;background:linear-gradient(135deg, rgba(122,162,255,.12), rgba(0,212,255,.12));opacity:0;transition:opacity .25s ease}
-.tool-card:hover::after{opacity:1}
+        .background-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
 
-/* ===== Dashboard (separate design) ===== */
-#dash{display:grid;grid-template-columns:260px 1fr;gap:0}
-.sidebar{position:sticky;top:0;height:100vh;background:linear-gradient(180deg, rgba(18,21,40,.95), rgba(18,21,40,.8));border-right:1px solid var(--glass-border);padding:18px}
-.side-brand{display:flex;align-items:center;gap:12px;margin-bottom:16px}
-.side-logo{width:34px;height:34px;border-radius:10px;background:conic-gradient(from 180deg, var(--accent), var(--accent2), var(--accent3));box-shadow:0 0 20px rgba(122,162,255,.35);animation:spin 8s linear infinite}
-.side-title{font-weight:800;letter-spacing:.4px}
-.side-nav{display:grid;gap:8px;margin-top:12px}
-.side-btn{background:linear-gradient(180deg, rgba(26,31,53,.95), rgba(26,31,53,.75));border:1px solid var(--glass-border);color:var(--text);border-radius:10px;padding:10px;cursor:pointer;text-align:left}
-.side-btn:hover{border-color:var(--accent)}
-.main{min-height:100vh}
-.main-header{position:sticky;top:0;z-index:40;background:linear-gradient(180deg, rgba(7,10,22,.85), rgba(7,10,22,.65));backdrop-filter:blur(10px);border-bottom:1px solid var(--glass-border);padding:14px 18px;display:flex;justify-content:space-between;align-items:center}
-.main-title{font-weight:800;letter-spacing:.4px}
-.stats{display:flex;gap:12px;flex-wrap:wrap}
-.stat{background:var(--glass);border:1px solid var(--glass-border);border-radius:12px;padding:10px 12px}
-.stat .num{font-weight:800}
-.dash-wrap{padding:18px;display:grid;gap:18px}
-.tools-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-@media(max-width:1100px){.tools-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:750px){.tools-grid{grid-template-columns:1fr}}
-.tool-tile{background:var(--glass);border:1px solid var(--glass-border);border-radius:16px;padding:16px;position:relative;overflow:hidden}
-.tool-tile h3{margin:0 0 6px}
-.tool-tile p{margin:0;color:var(--muted)}
-.tool-tile .actions{margin-top:12px;display:flex;gap:10px;flex-wrap:wrap}
-.tool-tile::after{content:"";position:absolute;inset:0;border-radius:16px;background:linear-gradient(135deg, rgba(122,162,255,.12), rgba(0,212,255,.12));opacity:0;transition:opacity .25s ease}
-.tool-tile:hover::after{opacity:1}
-.banner{background:linear-gradient(90deg, rgba(122,162,255,.18), rgba(0,212,255,.18));border:1px solid var(--glass-border);border-radius:14px;padding:14px}
-</style>
+        .wave {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            opacity: 0.15;
+            background: radial-gradient(circle at center, var(--neon-cyan) 0%, transparent 70%);
+            animation: waveMove 25s infinite linear;
+        }
+
+        .wave-1 {
+            top: -50%;
+            left: -50%;
+            animation-duration: 30s;
+            opacity: 0.1;
+            background: radial-gradient(circle at center, var(--neon-magenta) 0%, transparent 70%);
+        }
+
+        .wave-2 {
+            top: -30%;
+            left: -30%;
+            animation-duration: 20s;
+            animation-direction: reverse;
+            opacity: 0.12;
+        }
+
+        .wave-3 {
+            top: -70%;
+            left: -10%;
+            animation-duration: 35s;
+            opacity: 0.08;
+            background: radial-gradient(circle at center, var(--neon-blue) 0%, transparent 70%);
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes waveMove {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            25% { transform: translateY(-20px) translateX(10px); }
+            50% { transform: translateY(0) translateX(20px); }
+            75% { transform: translateY(20px) translateX(10px); }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            z-index: 10;
+        }
+
+        .logo-icon {
+            color: var(--neon-cyan);
+            font-size: 2rem;
+            filter: drop-shadow(0 0 8px rgba(0, 243, 255, 0.7));
+        }
+
+        .main-content {
+            text-align: center;
+            width: 100%;
+            max-width: 900px;
+            margin-top: 2rem;
+        }
+
+        .branding-container {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 3rem 4rem;
+            margin-bottom: 4rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        .branding-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, 
+                rgba(0, 243, 255, 0.05) 0%, 
+                rgba(255, 0, 255, 0.05) 50%, 
+                rgba(0, 102, 255, 0.05) 100%);
+            z-index: -1;
+        }
+
+        .branding-text {
+            font-size: 3.8rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, #ffffff, var(--neon-cyan), var(--neon-magenta));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+            letter-spacing: -0.5px;
+        }
+
+        .branding-subtitle {
+            font-size: 1.4rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 1rem;
+            text-transform: uppercase;
+        }
+
+        .buttons-container {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            animation: fadeInUp 1.2s ease-out 0.3s both;
+        }
+
+        .btn {
+            padding: 1.2rem 2.8rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.5px;
+            min-width: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            text-decoration: none;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.7s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-start {
+            background: linear-gradient(135deg, var(--neon-cyan), #0088cc);
+            color: #0c1a2d;
+            box-shadow: 0 0 25px rgba(0, 243, 255, var(--glow-intensity)),
+                        0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-start:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 0 35px rgba(0, 243, 255, calc(var(--glow-intensity) + 0.2)),
+                        0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .btn-signup {
+            background: linear-gradient(135deg, var(--neon-magenta), #9900cc);
+            color: white;
+            box-shadow: 0 0 25px rgba(255, 0, 255, var(--glow-intensity)),
+                        0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-signup:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 0 35px rgba(255, 0, 255, calc(var(--glow-intensity) + 0.2)),
+                        0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .btn-login {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1),
+                        inset 0 0 20px rgba(255, 255, 255, 0.05);
+        }
+
+        .btn-login:hover {
+            transform: translateY(-8px) scale(1.05);
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.5),
+                        inset 0 0 20px rgba(0, 243, 255, 0.1);
+        }
+
+        .btn-icon {
+            font-size: 1.3rem;
+        }
+
+        .features-preview {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 5rem;
+            flex-wrap: wrap;
+            animation: fadeInUp 1.2s ease-out 0.6s both;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 1.5rem;
+            width: 180px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--neon-cyan);
+            box-shadow: 0 10px 25px rgba(0, 243, 255, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--neon-cyan);
+        }
+
+        .feature-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 2rem;
+            width: 100%;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+            z-index: 10;
+        }
+
+        .glow-line {
+            position: absolute;
+            height: 1px;
+            width: 100%;
+            background: linear-gradient(90deg, transparent, var(--neon-cyan), var(--neon-magenta), transparent);
+            bottom: 0;
+            left: 0;
+            filter: blur(1px);
+            opacity: 0.7;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .branding-text {
+                font-size: 3rem;
+            }
+            
+            .branding-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .btn {
+                padding: 1rem 2rem;
+                min-width: 160px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .branding-text {
+                font-size: 2.5rem;
+            }
+            
+            .branding-container {
+                padding: 2rem;
+            }
+            
+            .buttons-container {
+                gap: 1.5rem;
+            }
+            
+            .btn {
+                min-width: 140px;
+                padding: 0.9rem 1.5rem;
+                font-size: 1.1rem;
+            }
+            
+            .features-preview {
+                gap: 1rem;
+            }
+            
+            .feature-card {
+                width: 150px;
+                padding: 1rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .branding-text {
+                font-size: 2rem;
+            }
+            
+            .branding-subtitle {
+                font-size: 1rem;
+                letter-spacing: 2px;
+            }
+            
+            .buttons-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 280px;
+            }
+            
+            .features-preview {
+                margin-top: 3rem;
+            }
+            
+            .feature-card {
+                width: 130px;
+            }
+        }
+    </style>
 </head>
 <body>
-
-<!-- ===== View: Homepage ===== -->
-<section id="home" class="view active">
-  <canvas id="particles"></canvas>
-  <div class="cursor-glow" id="cursorGlow"></div>
-
-  <header class="header">
-    <div class="brand">
-      <div class="logo"></div>
-      <div>
-        <div class="title">rewatool</div>
-        <div class="sub">Cinematic premium experience • Free, fast, professional</div>
-      </div>
+    <!-- Animated Background -->
+    <div class="background-container">
+        <div class="wave wave-1"></div>
+        <div class="wave wave-2"></div>
+        <div class="wave wave-3"></div>
     </div>
-    <div class="nav">
-      <button class="btn" id="btnAbout">About</button>
-    </div>
-  </header>
 
-  <section class="hero">
-    <div class="brandline"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
-    <h1 id="heroTitle">r e w a t o o l</h1>
-    <p>Open free. No login. No watermark. Built for speed, clarity, and trust.</p>
-    <div class="cta">
-      <button class="btn" id="btnStart">Start Free</button>
-      <button class="btn" id="btnExplore">Explore Tools</button>
-    </div>
-    <div class="wave"></div>
-  </section>
-
-  <section class="marquee">
-    <div class="track">Premium UX • Animated Logo • Ambient Motion • Micro‑interactions • Parallax • Scroll Reveal • Glass Panels • Premium Gradients • Ad‑ready • Fast • Mobile‑friendly • Premium UX • Animated Logo • Ambient Motion • Micro‑interactions • Parallax • Scroll Reveal • Glass Panels • Premium Gradients • Ad‑ready • Fast • Mobile‑friendly</div>
-  </section>
-
-  <main class="container">
-    <section class="card ad">
-      <div class="label">Ad slot (Top banner)</div>
-      <div>Placeholder — 728x90 / responsive</div>
-    </section>
-
-    <section class="card">
-      <div class="badge">Zero friction: Upload → Process → Download</div>
-      <div class="badge">Mobile‑friendly • Animated UI • Ad‑safe</div>
-      <div class="badge">Distinct dashboards per tool</div>
-    </section>
-
-    <section class="card">
-      <div class="grid">
-        <div class="card tool-card">
-          <h3>Magic Background Remover</h3>
-          <p>Remove background, add solid/gradient, soft edges—instant PNG.</p>
-          <div class="actions">
-            <button class="btn" data-open="bg">Open</button>
-            <span class="badge">Free</span>
-          </div>
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Logo -->
+        <div class="logo">
+            <i class="fas fa-robot logo-icon"></i>
+            <span>Ai REWATOOL</span>
         </div>
-        <div class="card tool-card">
-          <h3>Face Enhancer (Lite)</h3>
-          <p>One‑click quality boost, presets, compare slider, small upscale.</p>
-          <div class="actions">
-            <button class="btn" data-open="enh">Open</button>
-            <span class="badge">Free</span>
-          </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Branding with Glass Effect -->
+            <div class="branding-container">
+                <h1 class="branding-text">Ai REWATOOL</h1>
+                <p class="branding-subtitle">Powerful & Professional Tools</p>
+                <div class="glow-line"></div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="buttons-container">
+                <a href="dashboard2.html" class="btn btn-start">
+                    <i class="fas fa-play-circle btn-icon"></i>
+                    Start Free
+                </a>
+                <a href="register.html" class="btn btn-signup">
+                    <i class="fas fa-user-plus btn-icon"></i>
+                    Sign Up
+                </a>
+                <a href="login.html" class="btn btn-login">
+                    <i class="fas fa-sign-in-alt btn-icon"></i>
+                    Login
+                </a>
+            </div>
+
+            <!-- Features Preview -->
+            <div class="features-preview">
+                <div class="feature-card">
+                    <i class="fas fa-brain feature-icon"></i>
+                    <p class="feature-title">AI-Powered Analysis</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-chart-line feature-icon"></i>
+                    <p class="feature-title">Advanced Analytics</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-bolt feature-icon"></i>
+                    <p class="feature-title">Real-Time Processing</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-shield-alt feature-icon"></i>
+                    <p class="feature-title">Enterprise Security</p>
+                </div>
+            </div>
         </div>
-        <div class="card tool-card">
-          <h3>Image Compressor</h3>
-          <p>Reduce size with quality slider—fast, web‑ready JPG.</p>
-          <div class="actions">
-            <button class="btn" data-open="comp">Open</button>
-            <span class="badge">Free</span>
-          </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>© 2023 Ai REWATOOL. All rights reserved. Experience the future of AI tools today.</p>
         </div>
-      </div>
-    </section>
-
-    <section class="card ad">
-      <div class="label">Ad slot (Bottom banner)</div>
-      <div>Placeholder — 728x90 / responsive</div>
-    </section>
-  </main>
-
-  <footer class="card" style="text-align:center">© rewatool — Cinematic, premium, and free. No login. No watermark.</footer>
-</section>
-
-<!-- ===== View: Dashboard (separate design) ===== -->
-<section id="dash" class="view">
-  <aside class="sidebar">
-    <div class="side-brand">
-      <div class="side-logo"></div>
-      <div>
-        <div class="side-title">rewatool</div>
-        <div class="sub">Pro Dashboard</div>
-      </div>
-    </div>
-    <div class="side-nav">
-      <button class="side-btn" data-open="bg">Background Remover</button>
-      <button class="side-btn" data-open="enh">Face Enhancer</button>
-      <button class="side-btn" data-open="comp">Compressor</button>
-      <button class="side-btn" data-open="conv">Converter</button>
-      <button class="side-btn" data-open="wm">Watermark Kit</button>
-      <button class="side-btn" id="btnBack">← Back to Home</button>
-    </div>
-    <div class="ad" style="margin-top:16px">
-      <div class="label">Ad slot (Sidebar)</div>
-      <div>Placeholder — 300x600 / responsive</div>
-    </div>
-  </aside>
-
-  <div class="main">
-    <div class="main-header">
-      <div class="main-title">Start Free — Your Workspace</div>
-      <div class="stats">
-        <div class="stat"><div class="num" id="st1">0</div><div class="sub">Edits</div></div>
-        <div class="stat"><div class="num" id="st2">0</div><div class="sub">Downloads</div></div>
-        <div class="stat"><div class="num" id="st3">0</div><div class="sub">Tools Used</div></div>
-      </div>
     </div>
 
-    <div class="dash-wrap">
-      <div class="banner">Welcome! Pick a tool from the left. No login, no watermark—instant results.</div>
+    <script>
+        // Create floating particles
+        function createParticles() {
+            const container = document.querySelector('.background-container');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random size and position
+                const size = Math.random() * 4 + 1;
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                const duration = Math.random() * 20 + 10;
+                const delay = Math.random() * 10;
+                
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${posX}%`;
+                particle.style.top = `${posY}%`;
+                particle.style.animationDuration = `${duration}s`;
+                particle.style.animationDelay = `${delay}s`;
+                particle.style.opacity = Math.random() * 0.5 + 0.1;
+                
+                container.appendChild(particle);
+            }
+        }
 
-      <section class="card ad">
-        <div class="label">Ad slot (Top banner)</div>
-        <div>Placeholder — 728x90 / responsive</div>
-      </section>
-
-      <section class="card">
-        <div class="tools-grid">
-          <div class="tool-tile">
-            <h3>Magic Background Remover</h3>
-            <p>Remove background, add solid/gradient, soft edges—instant PNG.</p>
-            <div class="actions">
-              <button class="btn" data-open="bg">Open</button>
-              <span class="badge">Free</span>
-            </div>
-          </div>
-          <div class="tool-tile">
-            <h3>Face Enhancer (Lite)</h3>
-            <p>One‑click quality boost, presets, compare slider, small upscale.</p>
-            <div class="actions">
-              <button class="btn" data-open="enh">Open</button>
-              <span class="badge">Free</span>
-            </div>
-          </div>
-          <div class="tool-tile">
-            <h3>Image Compressor</h3>
-            <p>Reduce size with quality slider—fast, web‑ready JPG.</p>
-            <div class="actions">
-              <button class="btn" data-open="comp">Open</button>
-              <span class="badge">Free</span>
-            </div>
-          </div>
-          <div class="tool-tile">
-            <h3>Image Converter</h3>
-            <p>Convert PNG/JPG/WebP—simple, instant download.</p>
-            <div class="actions">
-              <button class="btn" data-open="conv">Open</button>
-              <span class="badge">Free</span>
-            </div>
-          </div>
-          <div class="tool-tile">
-            <h3>Watermark & Brand Kit</h3>
-            <p>Add text/logo watermark—position presets, opacity, brand colors.</p>
-            <div class="actions">
-              <button class="btn" data-open="wm">Open</button>
-              <span class="badge">Free</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="card ad">
-        <div class="label">Ad slot (Bottom banner)</div>
-        <div>Placeholder — 728x90 / responsive</div>
-      </section>
-    </div>
-  </div>
-</section>
-
-<!-- ===== Modal shell ===== -->
-<div class="modal" id="modal">
-  <div class="sheet">
-    <div class="head">
-      <h2 id="modalTitle">Tool</h2>
-      <div class="row">
-        <button class="btn" id="btnHelp">Help</button>
-        <button class="btn" id="btnClose">Close</button>
-      </div>
-    </div>
-    <div class="body" id="modalBody">
-      <section class="card">
-        <div class="meter"><div class="fill" id="fill"></div></div>
-        <small class="status" id="status">Idle</small>
-      </section>
-      <section class="card">
-        <p style="color:var(--muted)">Upload → Process → Preview → Download. Tools plug in here later.</p>
-      </section>
-    </div>
-  </div>
-</div>
-
-<script>
-/* ===== Magnetic hover for buttons ===== */
-document.querySelectorAll('.btn').forEach(btn=>{
-  btn.addEventListener('mousemove',e=>{
-    const r=btn.getBoundingClientRect();
-    const x=((e.clientX-r.left)/r.width*100).toFixed(2)+'%';
-    const y=((e.clientY-r.top)/r.height*100).toFixed(2)+'%';
-    btn.style.setProperty('--mx',x);
-    btn.style.setProperty('--my',y);
-  });
-});
-
-/* ===== Cursor glow ===== */
-const glow=document.getElementById('cursorGlow');
-document.addEventListener('mousemove',(e)=>{
-  if(!glow) return;
-  glow.style.left=e.clientX+'px';
-  glow.style.top=e.clientY+'px';
-});
-
-/* ===== Scroll reveal for homepage tool cards ===== */
-const observer=new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('reveal'); });
-},{threshold:.15});
-document.querySelectorAll('#home .tool-card').forEach(el=>observer.observe(el));
-
-/* ===== Modal router ===== */
-const modal=document.getElementById('modal');
-const modalTitle=document.getElementById('modalTitle');
-function openTool(key){
-  modal.classList.add('open');
-  const names={bg:'Magic Background Remover',enh:'Face Enhancer (Lite)',comp:'Image Compressor',conv:'Image Converter',wm:'Watermark & Brand Kit'};
-  modalTitle.textContent=names[key]||'Tool';
-  setStatus('Idle',0);
-}
-document.querySelectorAll('[data-open]').forEach(btn=>{
-  btn.addEventListener('click',()=>openTool(btn.getAttribute('data-open')));
-});
-document.getElementById('btnClose').addEventListener('click',()=>modal.classList.remove('open'));
-document.getElementById('btnAbout').addEventListener('click',()=>alert('rewatool — Cinematic homepage + premium dashboard. No login, no watermark.'));
-document.getElementById('btnHelp').addEventListener('click',()=>alert('Upload → Process → Preview → Download. Minimal steps, instant results.'));
-document.addEventListener('keydown',(e)=>{ if(e.key==='Escape') modal.classList.remove('open'); });
-
-function setStatus(text,pct=null){
-  const statusEl=document.getElementById('status');
-  const fill=document.getElementById('fill');
-  if(statusEl) statusEl.textContent=text;
-  if(fill && pct!==null) fill.style.width=pct+'%';
-}
-
-/* ===== View switch: Start Free → Dashboard ===== */
-const home=document.getElementById('home');
-const dash=document.getElementById('dash');
-document.getElementById('btnStart').addEventListener('click',()=>{
-  home.classList.remove('active');
-  dash.classList.add('active');
-  animateStats();
-});
-document.getElementById('btnBack').addEventListener('click',()=>{
-  dash.classList.remove('active');
-  home.classList.add('active');
-});
-
-/* ===== Smooth scroll to tools on homepage ===== */
-document.getElementById('btnExplore').addEventListener('click',()=>{
-  const grid=document.querySelector('#home .grid');
-  window.scrollTo({top:grid.getBoundingClientRect().top+window.scrollY-80,behavior:'smooth'});
-});
-
-/* ===== Hero animated typography ===== */
-const heroTitle=document.getElementById('heroTitle');
-const text=heroTitle.textContent;
-heroTitle.textContent='';
-text.split('').forEach((ch,i)=>{
-  const span=document.createElement('span');
-  span.className='char';
-  span.textContent=ch;
-  heroTitle.appendChild(span);
-  setTimeout(()=>{ span.style.opacity=1; span.style.transform='translateY(0)'; span.style.transition='all .45s cubic-bezier(.2,.8,.2,1)'; }, 60*i);
-});
-
-/* ===== Particle background (homepage) ===== */
-const canvas=document.getElementById('particles');
-if(canvas){
-  const ctx=canvas.getContext('2d');
-  let W,H,particles=[];
-  function resize(){ W=canvas.width=window.innerWidth; H=canvas.height=window.innerHeight; }
-  window.addEventListener('resize',resize); resize();
-  function makeParticles(n=80){
-    particles=[];
-    for(let i=0;i<n;i++){
-      particles.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*0.6,vy:(Math.random()-.5)*0.6,r:Math.random()*2+0.6,a:Math.random()*0.6+0.2});
-    }
-  }
-  makeParticles();
-  (function step(){
-    ctx.clearRect(0,0,W,H);
-    for(const p of particles){
-      p.x+=p.vx; p.y+=p.vy;
-      if(p.x<0||p.x>W) p.vx*=-1;
-      if(p.y<0||p.y>H) p.vy*=-1;
-      ctx.beginPath();
-      const grd=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*6);
-      grd.addColorStop(0,`rgba(122,162,255,${p.a})`);
-      grd.addColorStop(1,'transparent');
-      ctx.fillStyle=grd;
-      ctx.arc(p.x,p.y,p.r*6,0,Math.PI*2);
-      ctx.fill();
-    }
-    requestAnimationFrame(step);
-  })();
-}
-
-/* ===== Parallax wave (homepage) ===== */
-const wave=document.querySelector('#home .hero .wave');
-window.addEventListener('scroll',()=>{
-  if(!wave || !home.classList.contains('active')) return;
-  const y=window.scrollY;
-  wave.style.transform=`translateX(-50%) translateY(${Math.max(-12, -y*0.05)}px)`;
-});
-
-/* ===== Dashboard stats animation ===== */
-function animateStats(){
-  const targets=[{el:document.getElementById('st1'),to:12},{el:document.getElementById('st2'),to:8},{el:document.getElementById('st3'),to:5}];
-  targets.forEach(t=>{
-    let v=0; const step=()=>{ v+=1; t.el.textContent=v; if(v<t.to) requestAnimationFrame(step); };
-    step();
-  });
-}
-</script>
+        // Interactive button effects
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            
+            const buttons = document.querySelectorAll('.btn');
+            
+            buttons.forEach(button => {
+                // Add ripple effect on click
+                button.addEventListener('click', function(e) {
+                    // Create ripple element
+                    const ripple = document.createElement('span');
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - size / 2;
+                    const y = e.clientY - rect.top - size / 2;
+                    
+                    ripple.style.width = ripple.style.height = `${size}px`;
+                    ripple.style.left = `${x}px`;
+                    ripple.style.top = `${y}px`;
+                    ripple.classList.add('ripple');
+                    
+                    // Add ripple styles
+                    ripple.style.position = 'absolute';
+                    ripple.style.borderRadius = '50%';
+                    ripple.style.backgroundColor = 'rgba(255, 255, 255, 0.7)';
+                    ripple.style.transform = 'scale(0)';
+                    ripple.style.animation = 'ripple-animation 0.6s linear';
+                    
+                    this.appendChild(ripple);
+                    
+                    // Remove ripple after animation completes
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 600);
+                    
+                    // For demo purposes, show alert if page doesn't exist
+                    const href = this.getAttribute('href');
+                    if (href === 'dashboard2.html' || href === 'register.html' || href === 'login.html') {
+                        // In a real implementation, these would navigate to actual pages
+                        // For this demo, we'll just show an alert
+                        e.preventDefault();
+                        const pageName = href.split('.')[0];
+                        alert(`In a real implementation, this would navigate to: ${pageName}`);
+                    }
+                });
+                
+                // Enhanced hover effect
+                button.addEventListener('mouseenter', function() {
+                    this.style.transform = this.classList.contains('btn-login') 
+                        ? 'translateY(-8px) scale(1.05)' 
+                        : 'translateY(-8px) scale(1.05)';
+                });
+                
+                button.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+            
+            // Parallax effect for waves
+            document.addEventListener('mousemove', function(e) {
+                const waves = document.querySelectorAll('.wave');
+                const mouseX = e.clientX / window.innerWidth;
+                const mouseY = e.clientY / window.innerHeight;
+                
+                waves.forEach((wave, index) => {
+                    const speed = 0.5 + index * 0.2;
+                    const x = (mouseX * speed * 100) - 50;
+                    const y = (mouseY * speed * 100) - 50;
+                    
+                    wave.style.transform = `translate(${x}px, ${y}px) rotate(${index * 45}deg)`;
+                });
+            });
+            
+            // Add CSS for ripple animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes ripple-animation {
+                    to {
+                        transform: scale(4);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        });
+    </script>
 </body>
 </html>
