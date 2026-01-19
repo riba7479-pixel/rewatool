@@ -2,95 +2,109 @@
 <html lang="hi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rewatool.online | Professional AI</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Rewatool.online | Elite AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --deep-blue: #000d2b;
+            --deep-blue: #000a1f;
             --electric-blue: #00d2ff;
             --royal-blue: #0056b3;
             --glass: rgba(255, 255, 255, 0.05);
-            --border: rgba(0, 210, 255, 0.4);
+            --border: rgba(0, 210, 255, 0.25);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        /* Smooth Scrolling */
+        html { scroll-behavior: smooth; }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
 
         body {
             background-color: var(--deep-blue);
             color: white;
+            line-height: 1.6;
             overflow-x: hidden;
-            /* Yahan se asli blue depth aati hai */
-            background: radial-gradient(circle at center, #002b5c 0%, #000d2b 100%);
+            background: radial-gradient(circle at center, #001d4d 0%, #000a1f 100%);
         }
 
-        /* --- THE ANIMATION CANVAS (STARS + TAAR) --- */
+        /* --- LIGHT-WEIGHT ANIMATION --- */
         #bg-canvas {
             position: fixed; inset: 0; z-index: -1;
+            pointer-events: none; /* Scroll ko block nahi karega */
         }
 
-        /* --- HEADER --- */
+        /* --- NAVIGATION --- */
         header {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 12px 5%; position: fixed; width: 100%; top: 0; z-index: 1000;
-            backdrop-filter: blur(20px); border-bottom: 1px solid var(--border);
+            padding: 15px 5%; position: sticky; top: 0; z-index: 1000;
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--border);
         }
 
-        .logo { font-weight: 800; font-size: clamp(18px, 5vw, 24px); }
-        .logo span { color: var(--electric-blue); text-shadow: 0 0 10px var(--electric-blue); }
+        .logo { font-weight: 800; font-size: 1.4rem; letter-spacing: -1px; }
+        .logo span { color: var(--electric-blue); }
 
         .nav-btns { display: flex; gap: 10px; }
         
-        /* Mobile responsive buttons */
         .btn-nav {
-            padding: 8px 16px; border-radius: 10px; font-size: 12px; font-weight: 700;
-            cursor: pointer; transition: 0.3s; border: 1px solid var(--border);
+            padding: 8px 18px; border-radius: 12px; font-size: 13px; font-weight: 700;
+            border: 1px solid var(--border); transition: 0.3s;
         }
-        .btn-login { background: var(--glass); color: white; }
-        .btn-signup { background: var(--electric-blue); color: #000; border: none; }
+        .login { background: var(--glass); color: white; }
+        .signup { background: var(--electric-blue); color: #000; border: none; }
 
-        /* --- HERO --- */
+        /* --- HERO SECTION --- */
         .hero {
-            height: 100vh; display: flex; flex-direction: column;
-            justify-content: center; align-items: center; text-align: center; padding: 0 8%;
+            padding: 100px 6% 60px; text-align: center;
+            display: flex; flex-direction: column; align-items: center;
         }
 
         h1 {
-            font-size: clamp(40px, 10vw, 85px); font-weight: 800; line-height: 0.9;
+            font-size: clamp(2.5rem, 8vw, 5.5rem); font-weight: 800; line-height: 1.1;
             margin-bottom: 20px; letter-spacing: -2px;
             background: linear-gradient(180deg, #fff, var(--electric-blue));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
         .hero-p {
-            font-size: clamp(15px, 4vw, 19px); color: rgba(200, 230, 255, 0.7);
+            font-size: clamp(1rem, 3vw, 1.3rem); color: rgba(200, 230, 255, 0.7);
             max-width: 600px; margin-bottom: 40px;
         }
 
         .btn-main {
-            padding: 18px 55px; border-radius: 100px; font-size: 18px; font-weight: 800;
+            padding: 18px 50px; border-radius: 50px; font-size: 1.1rem; font-weight: 800;
             background: linear-gradient(135deg, var(--electric-blue), var(--royal-blue));
             color: white; border: none; cursor: pointer;
-            box-shadow: 0 0 30px rgba(0, 210, 255, 0.5);
+            box-shadow: 0 10px 30px rgba(0, 210, 255, 0.4);
+            transition: transform 0.2s ease;
         }
+        .btn-main:active { transform: scale(0.95); }
 
-        /* --- CARDS GRID --- */
+        /* --- TOOLS GRID: FULLY RESPONSIVE --- */
         .tools-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px; width: 100%; max-width: 1200px; padding: 0 6% 100px; margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px; width: 90%; max-width: 1200px; margin: 40px auto 100px;
         }
 
         .card {
-            background: rgba(0, 43, 92, 0.5); border: 1px solid var(--border);
-            padding: 40px 30px; border-radius: 35px; backdrop-filter: blur(10px);
-            transition: 0.4s;
+            background: rgba(0, 43, 92, 0.4); border: 1px solid var(--border);
+            padding: 30px; border-radius: 25px; transition: 0.3s ease;
+            display: flex; flex-direction: column; align-items: flex-start;
         }
-        .card:hover { transform: translateY(-12px); border-color: var(--electric-blue); }
 
-        .icon { font-size: 35px; margin-bottom: 20px; display: block; filter: drop-shadow(0 0 10px var(--electric-blue)); }
-        .card h3 { font-size: 24px; margin-bottom: 12px; color: #fff; }
-        .card p { color: rgba(200, 230, 255, 0.5); font-size: 15px; }
+        .card:hover { transform: translateY(-5px); border-color: var(--electric-blue); }
 
+        .icon { font-size: 2.5rem; margin-bottom: 15px; }
+        .card h3 { font-size: 1.5rem; margin-bottom: 10px; color: #fff; }
+        .card p { color: rgba(200, 230, 255, 0.6); font-size: 0.95rem; }
+
+        /* Tablet/Mobile Adjustments */
+        @media (max-width: 768px) {
+            header { padding: 12px 4%; }
+            .hero { padding: 80px 5% 40px; }
+            .tools-grid { width: 95%; gap: 15px; }
+        }
     </style>
 </head>
 <body>
@@ -100,21 +114,33 @@
     <header>
         <div class="logo">REWATOOL<span>.online</span></div>
         <div class="nav-btns">
-            <button class="btn-nav btn-login">Login</button>
-            <button class="btn-nav btn-signup">Sign Up</button>
+            <button class="btn-nav login">Login</button>
+            <button class="btn-nav signup">Sign Up</button>
         </div>
     </header>
 
     <main class="hero">
-        <h1>Powerful & <br> Professional</h1>
-        <p class="hero-p">The future of AI-driven creative tools. Fast, professional, and built on a neural network of innovation.</p>
-        <button class="btn-main">Start Free Now</button>
+        <h1>Fast & <br> Professional</h1>
+        <p class="hero-p">Experience a lag-free AI workspace. Professional tools built for high-speed performance on every device.</p>
+        <button class="btn-main">Get Started Free</button>
     </main>
 
     <div class="tools-grid">
-        <div class="card"><span class="icon">🖼️</span><h3>BG Remover</h3><p>Remove backgrounds with industrial AI precision in seconds.</p></div>
-        <div class="card"><span class="icon">🪄</span><h3>AI Eraser</h3><p>Instantly remove objects and heal photos with neural logic.</p></div>
-        <div class="card"><span class="icon">⚡</span><h3>Neural Logic</h3><p>A high-speed engine for complex professional task processing.</p></div>
+        <div class="card">
+            <div class="icon">🖼️</div>
+            <h3>BG Remover</h3>
+            <p>Cut backgrounds with surgical AI precision. No lag, just speed.</p>
+        </div>
+        <div class="card">
+            <div class="icon">🪄</div>
+            <h3>AI Eraser</h3>
+            <p>Clean your photos instantly with our smart healing engine.</p>
+        </div>
+        <div class="card">
+            <div class="icon">⚡</div>
+            <h3>Neural Logic</h3>
+            <p>Processing complex tasks at the speed of thought.</p>
+        </div>
     </div>
 
     <script>
@@ -125,48 +151,43 @@
         function resize() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
+            particles = [];
+            // Particle count controlled for mobile speed
+            let count = window.innerWidth < 768 ? 40 : 80;
+            for (let i = 0; i < count; i++) particles.push(new Particle());
         }
-        window.addEventListener('resize', resize);
-        resize();
 
         class Particle {
             constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2.5 + 1; // Bigger stars
-                this.speedX = (Math.random() - 0.5) * 0.6;
-                this.speedY = (Math.random() - 0.5) * 0.6;
+                this.size = Math.random() * 2 + 1;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
             }
             update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+                this.x += this.vx;
+                this.y += this.vy;
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
             }
             draw() {
-                ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
-                ctx.shadowBlur = 10;
-                ctx.shadowColor = '#00d2ff';
+                ctx.fillStyle = 'rgba(0, 210, 255, 0.6)';
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fill();
             }
         }
 
-        for (let i = 0; i < 70; i++) particles.push(new Particle());
-
         function animate() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             particles.forEach((p, i) => {
                 p.update();
                 p.draw();
-                // Connect lines (Taar)
                 for (let j = i + 1; j < particles.length; j++) {
-                    const dx = p.x - particles[j].x;
-                    const dy = p.y - particles[j].y;
-                    const d = Math.sqrt(dx*dx + dy*dy);
-                    if (d < 150) {
-                        ctx.strokeStyle = `rgba(0, 210, 255, ${0.2 - d/150})`;
+                    let d = Math.sqrt((p.x - particles[j].x)**2 + (p.y - particles[j].y)**2);
+                    if (d < 120) {
+                        ctx.strokeStyle = `rgba(0, 210, 255, ${0.15 - d/1000})`;
                         ctx.lineWidth = 0.5;
                         ctx.beginPath();
                         ctx.moveTo(p.x, p.y);
@@ -177,6 +198,9 @@
             });
             requestAnimationFrame(animate);
         }
+
+        window.addEventListener('resize', resize);
+        resize();
         animate();
     </script>
 </body>
