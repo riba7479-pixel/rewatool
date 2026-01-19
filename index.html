@@ -30,7 +30,7 @@
         /* --- LIGHT-WEIGHT ANIMATION --- */
         #bg-canvas {
             position: fixed; inset: 0; z-index: -1;
-            pointer-events: none; /* Scroll ko block nahi karega */
+            pointer-events: none;
         }
 
         /* --- NAVIGATION --- */
@@ -49,6 +49,7 @@
         .btn-nav {
             padding: 8px 18px; border-radius: 12px; font-size: 13px; font-weight: 700;
             border: 1px solid var(--border); transition: 0.3s;
+            cursor: pointer;
         }
         .login { background: var(--glass); color: white; }
         .signup { background: var(--electric-blue); color: #000; border: none; }
@@ -80,7 +81,7 @@
         }
         .btn-main:active { transform: scale(0.95); }
 
-        /* --- TOOLS GRID: FULLY RESPONSIVE --- */
+        /* --- TOOLS GRID --- */
         .tools-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -99,7 +100,6 @@
         .card h3 { font-size: 1.5rem; margin-bottom: 10px; color: #fff; }
         .card p { color: rgba(200, 230, 255, 0.6); font-size: 0.95rem; }
 
-        /* Tablet/Mobile Adjustments */
         @media (max-width: 768px) {
             header { padding: 12px 4%; }
             .hero { padding: 80px 5% 40px; }
@@ -114,15 +114,15 @@
     <header>
         <div class="logo">REWATOOL<span>.online</span></div>
         <div class="nav-btns">
-            <button class="btn-nav login">Login</button>
-            <button class="btn-nav signup">Sign Up</button>
+            <button onclick="window.location.href='login.html'" class="btn-nav login">Login</button>
+            <button onclick="window.location.href='signup.html'" class="btn-nav signup">Sign Up</button>
         </div>
     </header>
 
     <main class="hero">
         <h1>Fast & <br> Professional</h1>
         <p class="hero-p">Experience a lag-free AI workspace. Professional tools built for high-speed performance on every device.</p>
-        <button class="btn-main">Get Started Free</button>
+        <button onclick="window.location.href='signup.html'" class="btn-main">Get Started Free</button>
     </main>
 
     <div class="tools-grid">
@@ -152,7 +152,6 @@
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
             particles = [];
-            // Particle count controlled for mobile speed
             let count = window.innerWidth < 768 ? 40 : 80;
             for (let i = 0; i < count; i++) particles.push(new Particle());
         }
